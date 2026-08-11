@@ -4,8 +4,16 @@ const PAYMENT_DURATION = 3 * 60 * 60;
 // Ambil data dari URL
 const params = new URLSearchParams(window.location.search);
 
-const price = Number(params.get("price"));
-const reference = params.get("reference") || "UNKNOWN";
+const price = Number(
+  String(params.get("price") || "").replace(/[^\d]/g, "")
+);
+
+const reference =
+  params.get("external_reference") ||
+  params.get("reference") ||
+  params.get("externalReference") ||
+  params.get("transaction_id") ||
+  "UNKNOWN";
 
 // Nominal
 const amount = Number.isFinite(price) && price > 0
