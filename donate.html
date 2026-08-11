@@ -32,432 +32,412 @@
 			<img src="img/logo.png" alt="Doaing logo">
 		</div>
 
-		<style>
-    html, body {
-        background: transparent !important;
-        background-color: transparent !important;
+	<div id="doaing-products">
+  <style>
+    /* SEMUA STYLE DIBATASI KE #doaing-products
+       agar tidak merusak background/CSS website utama. */
+
+    #doaing-products {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background: transparent !important;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      box-sizing: border-box;
     }
 
-    html {
-        margin: 0 !important;
-        padding: 0 !important;
+    #doaing-products *,
+    #doaing-products *::before,
+    #doaing-products *::after {
+      box-sizing: border-box;
     }
 
-    body {
-        margin: 0 !important;
-        padding: 0 !important;
-        background: transparent !important;
-        background-color: transparent !important;
+    #doaing-products .dp-title {
+      margin: 0 0 28px !important;
+      padding: 0 !important;
+      text-align: center;
+      color: #fff !important;
+      background: transparent !important;
+      font-size: 42px !important;
+      line-height: 1.05 !important;
+      font-weight: 700 !important;
     }
 
-    * {
-        box-sizing: border-box;
+    #doaing-products .dp-grid {
+      width: min(650px, 100%);
+      margin: 0 auto;
+      padding: 0 10px 30px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 35px;
+      row-gap: 56px;
+      background: transparent !important;
     }
 
-    body {
-        margin: 0;
-        background: transparent;
-        font-family: Arial, Helvetica, sans-serif;
+    #doaing-products .dp-card {
+      min-width: 0;
+      text-align: center;
+      background: transparent !important;
+      color: #fff !important;
     }
 
-    .container {
-        background: transparent !important;
-        width: 100%;
-        max-width: 700px;
-        margin: 27px auto 0;
-        padding: 0 10px 40px;
+    #doaing-products .dp-name {
+      margin: 0 0 3px !important;
+      padding: 0 !important;
+      color: #fff !important;
+      background: transparent !important;
+      font-size: 27px !important;
+      line-height: 1.1 !important;
+      font-weight: 700 !important;
+      text-align: center;
     }
 
-    .title {
-        text-align: center;
-        font-size: 42px;
-        line-height: 1;
-        font-weight: 700;
-        margin: 0 0 27px;
+    #doaing-products .dp-image {
+      display: block;
+      width: 145px;
+      height: 137px;
+      max-width: 100%;
+      margin: 0 auto 3px !important;
+      padding: 0 !important;
+      object-fit: contain;
+      object-position: center;
+      background: transparent !important;
+      border: 0 !important;
     }
 
-    .products {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        column-gap: 46px;
-        row-gap: 57px;
+    #doaing-products .dp-price {
+      margin: 0 0 6px !important;
+      padding: 0 !important;
+      color: #fff !important;
+      background: transparent !important;
+      font-size: 27px !important;
+      line-height: 1.05 !important;
+      font-weight: 700 !important;
+      text-align: center;
     }
 
-    .product {
-        width: 196px;
-        text-align: left;
+    #doaing-products .dp-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: transparent !important;
     }
 
-    .product-name {
-        text-align: center;
-        font-size: 27px;
-        font-weight: 700;
-        margin: 0 0 3px;
-        line-height: 1.1;
+    #doaing-products .dp-btn {
+      height: 43px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      border-radius: 10px !important;
+      background: #fff !important;
+      color: #000 !important;
+      font-family: Arial, Helvetica, sans-serif !important;
+      font-size: 21px !important;
+      line-height: 43px !important;
+      font-weight: 700 !important;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: none !important;
     }
 
-    .product-image {
-        display: block;
-        width: 145px;
-        height: 137px;
-        margin: 0 auto 3px;
-        object-fit: contain;
-        object-position: center;
+    #doaing-products .dp-info {
+      width: 42px !important;
     }
 
-    .price {
-        text-align: left;
-        font-size: 27px;
-        font-weight: 700;
-        margin: 0 0 6px;
-        line-height: 1.05;
+    #doaing-products .dp-buy {
+      width: 91px !important;
     }
 
-    .buttons {
-        display: flex;
-        gap: 9px;
-        align-items: center;
+    #doaing-products .dp-btn:hover {
+      transform: scale(1.04);
     }
 
-    .btn {
-        height: 43px;
-        border: 0;
-        border-radius: 10px;
-        background: #fff;
-        color: #000;
-        font-size: 21px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: transform .15s ease;
+    /* Popup */
+    #doaing-products .dp-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2147483647;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 18px 15px;
+      background: rgba(0,0,0,.45) !important;
     }
 
-    .btn:hover {
-        transform: scale(1.04);
+    #doaing-products .dp-modal.dp-open {
+      display: flex;
     }
 
-    .info-btn {
-        width: 42px;
+    #doaing-products .dp-box {
+      position: relative;
+      width: min(673px, 100%);
+      max-height: calc(100vh - 36px);
+      overflow-y: auto;
+      margin: 0 !important;
+      padding: 8px 14px 20px !important;
+      border: 1px solid rgba(255,255,255,.2) !important;
+      border-radius: 12px !important;
+      background: rgba(255,0,0,.28) !important;
+      color: #fff !important;
+      box-shadow: 0 8px 40px rgba(0,0,0,.35) !important;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
 
-    .buy-btn {
-        width: 91px;
+    #doaing-products .dp-modal-title {
+      margin: 0 45px 17px !important;
+      padding: 0 !important;
+      color: #fff !important;
+      background: transparent !important;
+      font-size: 52px !important;
+      line-height: 1 !important;
+      font-weight: 700 !important;
+      text-align: center;
     }
 
-    /* POPUP */
-    .modal-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: transparent;
-        z-index: 9999;
-        align-items: flex-start;
-        justify-content: center;
-        padding-top: 18px;
+    #doaing-products .dp-close {
+      position: absolute;
+      top: 6px;
+      right: 14px;
+      width: auto !important;
+      height: auto !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      background: transparent !important;
+      color: #fff !important;
+      font-size: 38px !important;
+      line-height: 1 !important;
+      font-weight: 700 !important;
+      cursor: pointer;
     }
 
-    .modal-overlay.show {
-        display: flex;
+    #doaing-products .dp-benefits {
+      margin: 0 !important;
+      padding: 0 0 0 27px !important;
+      color: #fff !important;
+      background: transparent !important;
+      font-size: 31px !important;
+      line-height: 1.34 !important;
+      font-weight: 700 !important;
+      text-align: left;
     }
 
-    .modal {
-        position: relative;
-        width: min(673px, calc(100vw - 30px));
-        min-height: 587px;
-        background: rgba(255, 0, 0, 0.28);
-        border: 1px solid rgba(255, 255, 255, 0.20);
-        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border-radius: 12px;
-        padding: 8px 14px 20px;
-        color: #fff;
-        overflow: hidden;
+    #doaing-products .dp-benefits li {
+      margin: 0 !important;
+      padding: 0 !important;
+      color: #fff !important;
+      background: transparent !important;
     }
 
-    .modal-title {
-        text-align: center;
-        font-size: 52px;
-        line-height: 1;
-        font-weight: 700;
-        margin: 0 0 17px;
+    @media (max-width: 600px) {
+      #doaing-products .dp-title {
+        font-size: 34px !important;
+      }
+
+      #doaing-products .dp-grid {
+        column-gap: 10px;
+        row-gap: 45px;
+      }
+
+      #doaing-products .dp-name,
+      #doaing-products .dp-price {
+        font-size: 23px !important;
+      }
+
+      #doaing-products .dp-image {
+        width: 135px;
+        height: 125px;
+      }
+
+      #doaing-products .dp-modal-title {
+        font-size: 42px !important;
+      }
+
+      #doaing-products .dp-benefits {
+        font-size: 22px !important;
+      }
     }
 
-    .close {
-        position: absolute;
-        top: 6px;
-        right: 14px;
-        border: 0;
-        background: transparent;
-        color: #fff;
-        font-size: 38px;
-        line-height: 1;
-        font-weight: 700;
-        cursor: pointer;
+    @media (max-width: 390px) {
+      #doaing-products .dp-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
+  </style>
 
-    .benefits {
-        margin: 0;
-        padding-left: 27px;
-        font-size: 31px;
-        line-height: 1.34;
-        font-weight: 700;
-    }
+  <h1 class="dp-title">Katagory</h1>
 
-    @media (max-width: 760px) {
-        .container {
-            max-width: 680px;
-        }
+  <div class="dp-grid">
 
-        .products {
-            column-gap: 10px;
-        }
-
-        .product {
-            width: 100%;
-        }
-    }
-
-    @media (max-width: 560px) {
-        .title {
-            font-size: 34px;
-        }
-
-        .products {
-            grid-template-columns: repeat(2, 1fr);
-            row-gap: 45px;
-        }
-
-        .product-name,
-        .price {
-            font-size: 23px;
-        }
-
-        .product-image {
-            width: 135px;
-            height: 125px;
-        }
-
-        .modal {
-            min-height: auto;
-        }
-
-        .modal-title {
-            font-size: 42px;
-        }
-
-        .benefits {
-            font-size: 22px;
-        }
-    }
-</style>
-</head>
-
-<body>
-
-<div class="container">
-    <h1 class="title">Katagory</h1>
-
-    <div class="products">
-
-        <!-- PRODUK 1 -->
-        <div class="product">
-            <div class="product-name">Gakusei</div>
-            <img class="product-image"
-                 src="https://LINK-GAMBAR-1.com/logo.png"
-                 alt="Gakusei">
-            <div class="price">Rp. 15.000</div>
-            <div class="buttons">
-                <button class="btn info-btn" onclick="showDetail(0)">i</button>
-                <button class="btn buy-btn" onclick="buyProduct(0)">Beli</button>
-            </div>
-        </div>
-
-        <!-- PRODUK 2 -->
-        <div class="product">
-            <div class="product-name">Gakusei</div>
-            <img class="product-image"
-                 src="https://LINK-GAMBAR-2.com/logo.png"
-                 alt="Gakusei">
-            <div class="price">Rp. 15.000</div>
-            <div class="buttons">
-                <button class="btn info-btn" onclick="showDetail(1)">i</button>
-                <button class="btn buy-btn" onclick="buyProduct(1)">Beli</button>
-            </div>
-        </div>
-
-        <!-- PRODUK 3 -->
-        <div class="product">
-            <div class="product-name">Gakusei</div>
-            <img class="product-image"
-                 src="https://LINK-GAMBAR-3.com/logo.png"
-                 alt="Gakusei">
-            <div class="price">Rp. 15.000</div>
-            <div class="buttons">
-                <button class="btn info-btn" onclick="showDetail(2)">i</button>
-                <button class="btn buy-btn" onclick="buyProduct(2)">Beli</button>
-            </div>
-        </div>
-
-        <!-- PRODUK 4 -->
-        <div class="product">
-            <div class="product-name">Gakusei</div>
-            <img class="product-image"
-                 src="https://LINK-GAMBAR-4.com/logo.png"
-                 alt="Gakusei">
-            <div class="price">Rp. 15.000</div>
-            <div class="buttons">
-                <button class="btn info-btn" onclick="showDetail(3)">i</button>
-                <button class="btn buy-btn" onclick="buyProduct(3)">Beli</button>
-            </div>
-        </div>
-
-        <!-- PRODUK 5 -->
-        <div class="product">
-            <div class="product-name">Gakusei</div>
-            <img class="product-image"
-                 src="https://LINK-GAMBAR-5.com/logo.png"
-                 alt="Gakusei">
-            <div class="price">Rp. 15.000</div>
-            <div class="buttons">
-                <button class="btn info-btn" onclick="showDetail(4)">i</button>
-                <button class="btn buy-btn" onclick="buyProduct(4)">Beli</button>
-            </div>
-        </div>
-
-        <!-- PRODUK 6 -->
-        <div class="product">
-            <div class="product-name">Gakusei</div>
-            <img class="product-image"
-                 src="https://LINK-GAMBAR-6.com/logo.png"
-                 alt="Gakusei">
-            <div class="price">Rp. 15.000</div>
-            <div class="buttons">
-                <button class="btn info-btn" onclick="showDetail(5)">i</button>
-                <button class="btn buy-btn" onclick="buyProduct(5)">Beli</button>
-            </div>
-        </div>
-
+    <div class="dp-card">
+      <div class="dp-name">Gakusei</div>
+      <img class="dp-image" src="GANTI_DENGAN_LINK_GAMBAR_1" alt="Gakusei">
+      <div class="dp-price">Rp. 15.000</div>
+      <div class="dp-buttons">
+        <button class="dp-btn dp-info" type="button" onclick="dpShow(0)">i</button>
+        <button class="dp-btn dp-buy" type="button" onclick="dpBuy(0)">Beli</button>
+      </div>
     </div>
-</div>
 
-<!-- POPUP DETAIL -->
-<div id="detailModal" class="modal-overlay" onclick="closeOutside(event)">
-    <div class="modal">
-
-        <button class="close" onclick="closeDetail()">×</button>
-
-        <h2 class="modal-title">Detail</h2>
-
-        <ul class="benefits" id="benefitsList"></ul>
-
+    <div class="dp-card">
+      <div class="dp-name">Gakusei</div>
+      <img class="dp-image" src="GANTI_DENGAN_LINK_GAMBAR_2" alt="Gakusei">
+      <div class="dp-price">Rp. 15.000</div>
+      <div class="dp-buttons">
+        <button class="dp-btn dp-info" type="button" onclick="dpShow(1)">i</button>
+        <button class="dp-btn dp-buy" type="button" onclick="dpBuy(1)">Beli</button>
+      </div>
     </div>
-</div>
 
-<script>
-    /*
-      ==========================================================
-      EDIT BAGIAN INI
-      ==========================================================
-    */
+    <div class="dp-card">
+      <div class="dp-name">Gakusei</div>
+      <img class="dp-image" src="GANTI_DENGAN_LINK_GAMBAR_3" alt="Gakusei">
+      <div class="dp-price">Rp. 15.000</div>
+      <div class="dp-buttons">
+        <button class="dp-btn dp-info" type="button" onclick="dpShow(2)">i</button>
+        <button class="dp-btn dp-buy" type="button" onclick="dpBuy(2)">Beli</button>
+      </div>
+    </div>
 
-    const products = [
-        {
-            buyLink: "https://LINK-BELI-1.com",
-            benefits: [
-                "Mendapatkan Uang In-Game",
-                "Spesial Prefix",
-                "Kit Premium",
-                "Akses Role Premium Di Discord",
-                "Dan Benefit lainnya"
-            ]
-        },
-        {
-            buyLink: "https://LINK-BELI-2.com",
-            benefits: [
-                "Mendapatkan Uang In-Game",
-                "Spesial Prefix",
-                "Kit Premium",
-                "Akses Role Premium Di Discord",
-                "Dan Benefit lainnya"
-            ]
-        },
-        {
-            buyLink: "https://LINK-BELI-3.com",
-            benefits: [
-                "Mendapatkan Uang In-Game",
-                "Spesial Prefix",
-                "Kit Premium",
-                "Akses Role Premium Di Discord",
-                "Dan Benefit lainnya"
-            ]
-        },
-        {
-            buyLink: "https://LINK-BELI-4.com",
-            benefits: [
-                "Mendapatkan Uang In-Game",
-                "Spesial Prefix",
-                "Kit Premium",
-                "Akses Role Premium Di Discord",
-                "Dan Benefit lainnya"
-            ]
-        },
-        {
-            buyLink: "https://LINK-BELI-5.com",
-            benefits: [
-                "Mendapatkan Uang In-Game",
-                "Spesial Prefix",
-                "Kit Premium",
-                "Akses Role Premium Di Discord",
-                "Dan Benefit lainnya"
-            ]
-        },
-        {
-            buyLink: "https://LINK-BELI-6.com",
-            benefits: [
-                "Mendapatkan Uang In-Game",
-                "Spesial Prefix",
-                "Kit Premium",
-                "Akses Role Premium Di Discord",
-                "Dan Benefit lainnya"
-            ]
-        }
+    <div class="dp-card">
+      <div class="dp-name">Gakusei</div>
+      <img class="dp-image" src="GANTI_DENGAN_LINK_GAMBAR_4" alt="Gakusei">
+      <div class="dp-price">Rp. 15.000</div>
+      <div class="dp-buttons">
+        <button class="dp-btn dp-info" type="button" onclick="dpShow(3)">i</button>
+        <button class="dp-btn dp-buy" type="button" onclick="dpBuy(3)">Beli</button>
+      </div>
+    </div>
+
+    <div class="dp-card">
+      <div class="dp-name">Gakusei</div>
+      <img class="dp-image" src="GANTI_DENGAN_LINK_GAMBAR_5" alt="Gakusei">
+      <div class="dp-price">Rp. 15.000</div>
+      <div class="dp-buttons">
+        <button class="dp-btn dp-info" type="button" onclick="dpShow(4)">i</button>
+        <button class="dp-btn dp-buy" type="button" onclick="dpBuy(4)">Beli</button>
+      </div>
+    </div>
+
+    <div class="dp-card">
+      <div class="dp-name">Gakusei</div>
+      <img class="dp-image" src="GANTI_DENGAN_LINK_GAMBAR_6" alt="Gakusei">
+      <div class="dp-price">Rp. 15.000</div>
+      <div class="dp-buttons">
+        <button class="dp-btn dp-info" type="button" onclick="dpShow(5)">i</button>
+        <button class="dp-btn dp-buy" type="button" onclick="dpBuy(5)">Beli</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="dpModal" class="dp-modal" onclick="dpOutside(event)">
+    <div class="dp-box">
+      <button class="dp-close" type="button" onclick="dpClose()">×</button>
+      <div class="dp-modal-title">Detail</div>
+      <ul id="dpBenefits" class="dp-benefits"></ul>
+    </div>
+  </div>
+
+  <script>
+    const dpProducts = [
+      {
+        buy: "GANTI_DENGAN_LINK_BELI_1",
+        benefits: [
+          "Mendapatkan Uang In-Game",
+          "Spesial Prefix",
+          "Kit Premium",
+          "Akses Role Premium Di Discord",
+          "Dan Benefit lainnya"
+        ]
+      },
+      {
+        buy: "GANTI_DENGAN_LINK_BELI_2",
+        benefits: [
+          "Mendapatkan Uang In-Game",
+          "Spesial Prefix",
+          "Kit Premium",
+          "Akses Role Premium Di Discord",
+          "Dan Benefit lainnya"
+        ]
+      },
+      {
+        buy: "GANTI_DENGAN_LINK_BELI_3",
+        benefits: [
+          "Mendapatkan Uang In-Game",
+          "Spesial Prefix",
+          "Kit Premium",
+          "Akses Role Premium Di Discord",
+          "Dan Benefit lainnya"
+        ]
+      },
+      {
+        buy: "GANTI_DENGAN_LINK_BELI_4",
+        benefits: [
+          "Mendapatkan Uang In-Game",
+          "Spesial Prefix",
+          "Kit Premium",
+          "Akses Role Premium Di Discord",
+          "Dan Benefit lainnya"
+        ]
+      },
+      {
+        buy: "GANTI_DENGAN_LINK_BELI_5",
+        benefits: [
+          "Mendapatkan Uang In-Game",
+          "Spesial Prefix",
+          "Kit Premium",
+          "Akses Role Premium Di Discord",
+          "Dan Benefit lainnya"
+        ]
+      },
+      {
+        buy: "GANTI_DENGAN_LINK_BELI_6",
+        benefits: [
+          "Mendapatkan Uang In-Game",
+          "Spesial Prefix",
+          "Kit Premium",
+          "Akses Role Premium Di Discord",
+          "Dan Benefit lainnya"
+        ]
+      }
     ];
 
-    function showDetail(index) {
-        const list = document.getElementById("benefitsList");
-        list.innerHTML = "";
+    function dpShow(index) {
+      const list = document.getElementById("dpBenefits");
+      list.innerHTML = "";
 
-        products[index].benefits.forEach(function(item) {
-            const li = document.createElement("li");
-            li.textContent = item;
-            list.appendChild(li);
-        });
+      dpProducts[index].benefits.forEach(function(text) {
+        const li = document.createElement("li");
+        li.textContent = text;
+        list.appendChild(li);
+      });
 
-        document.getElementById("detailModal").classList.add("show");
+      document.getElementById("dpModal").classList.add("dp-open");
     }
 
-    function closeDetail() {
-        document.getElementById("detailModal").classList.remove("show");
+    function dpClose() {
+      document.getElementById("dpModal").classList.remove("dp-open");
     }
 
-    function closeOutside(event) {
-        if (event.target === document.getElementById("detailModal")) {
-            closeDetail();
-        }
+    function dpOutside(event) {
+      if (event.target.id === "dpModal") dpClose();
     }
 
-    function buyProduct(index) {
-        window.location.href = products[index].buyLink;
+    function dpBuy(index) {
+      window.location.href = dpProducts[index].buy;
     }
 
     document.addEventListener("keydown", function(event) {
-        if (event.key === "Escape") {
-            closeDetail();
-        }
+      if (event.key === "Escape") dpClose();
     });
-</script>
-	</div></a>
-
+  </script>
+</div>
 		</div>
 	
 		<div class="playercount" id="playercount">
