@@ -1,545 +1,77 @@
+<!-- Proudly created by Billy (https://bybilly.uk) -->
+<!-- Version: 1.10 -->
+
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pembayaran Manual</title>
-  <style>
-    * { box-sizing: border-box; }
-    html, body { margin: 0; min-height: 100%; }
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        linear-gradient(rgba(245,247,249,.94), rgba(245,247,249,.94)),
-        radial-gradient(circle at 10% 20%, #dfe4e8 1px, transparent 1px);
-      color: #161616;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+	<!-- Info meta tags, important for social media + SEO -->
+	<title>MyServer - Official Website</title>
+	<meta name="description" content="MyServer is a new and awesome Minecraft server. You can join with the IP 'play.myserver.net'.">
+	<meta property="og:title" content="MyServer - Official Website">
+	<meta property="og:site_name" content="MyServer">
+	<meta property="og:description" content="MyServer is a new and awesome Minecraft server. You can join with the IP 'play.myserver.net'.">
+	<meta property="og:image" content="https://bybilly.uk/portal/img/minecraft.jpg">
+	<meta property="og:url" content="https://bybilly.uk/">
+	<meta name="twitter:card" content="summary_large_image">
 
-    /* Pola latar belakang sederhana seperti halaman pembayaran */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      opacity: .35;
-      pointer-events: none;
-      background-image:
-        linear-gradient(45deg, transparent 46%, #d9dde1 47%, #d9dde1 53%, transparent 54%);
-      background-size: 42px 42px;
-    }
-
-    .overlay {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 48px 12px 20px;
-    }
-
-    .payment-card {
-      position: relative;
-      width: min(420px, 100%);
-      background: #fff;
-      border-radius: 7px;
-      overflow: hidden;
-      box-shadow: 0 8px 30px rgba(0,0,0,.16);
-    }
-
-    .topbar {
-      height: 72px;
-      background: #050505;
-      display: flex;
-      align-items: center;
-      padding: 0 18px;
-      position: relative;
-    }
-
-    .logo {
-      font-size: 34px;
-      font-weight: 900;
-      font-style: italic;
-      color: #7c3cff;
-      letter-spacing: -5px;
-      text-shadow: 2px 0 #b06cff;
-    }
-
-    .close {
-      position: absolute;
-      right: 16px;
-      top: 14px;
-      border: 0;
-      background: transparent;
-      color: #fff;
-      font-size: 27px;
-      cursor: pointer;
-      line-height: 1;
-    }
-
-    .summary {
-      padding: 15px 14px 12px;
-    }
-
-    .amount {
-      font-size: 25px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .order {
-      font-size: 11px;
-      color: #637184;
-      word-break: break-all;
-    }
-
-    .detail {
-      float: right;
-      color: #145cff;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .countdown {
-      clear: both;
-      background: #eef1f3;
-      text-align: center;
-      padding: 7px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .content {
-      padding: 16px;
-      max-height: 640px;
-      overflow-y: auto;
-    }
-
-    .title {
-      font-size: 17px;
-      font-weight: 700;
-      margin: 0 0 15px 4px;
-    }
-
-    .methods {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .method {
-      border: 1px solid #e1e4e8;
-      border-radius: 8px;
-      padding: 13px;
-      background: #fff;
-    }
-
-    .method-title {
-      font-weight: 700;
-      font-size: 15px;
-      margin-bottom: 6px;
-    }
-
-    .number-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .number {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: .3px;
-      flex: 1;
-    }
-
-    .copy {
-      border: 0;
-      border-radius: 6px;
-      background: #edf2ff;
-      color: #174de2;
-      padding: 7px 10px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .copy:active { transform: scale(.98); }
-
-    .note {
-      color: #6d7680;
-      font-size: 11px;
-      margin-top: 6px;
-    }
-
-    .qr-section {
-      text-align: center;
-      border: 1px solid #e3e5e8;
-      border-radius: 8px;
-      padding: 12px;
-      margin-top: 8px;
-    }
-
-    .qr-title {
-      text-align: left;
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    #qrisImage {
-      display: block;
-      width: 220px;
-      height: 220px;
-      object-fit: contain;
-      margin: 0 auto 10px;
-      border: 1px solid #eee;
-      background: #fff;
-    }
-
-    .qr-placeholder {
-      width: 220px;
-      height: 220px;
-      margin: 0 auto 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      border: 2px dashed #cfd4da;
-      color: #7b8490;
-      padding: 20px;
-      font-size: 13px;
-    }
-
-    .download {
-      display: block;
-      width: 100%;
-      border: 1px solid #3d3f49;
-      border-radius: 9px;
-      background: #fff;
-      padding: 11px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .instruction {
-      margin-top: 12px;
-      border-top: 1px solid #e3e5e8;
-      padding-top: 12px;
-    }
-
-    .instruction summary {
-      color: #194fdc;
-      font-weight: 700;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .instruction ol {
-      padding-left: 20px;
-      font-size: 13px;
-      line-height: 1.55;
-      color: #4f5964;
-    }
-
-    .status {
-      width: 100%;
-      margin-top: 14px;
-      border: 0;
-      border-radius: 9px;
-      background: #383944;
-      color: #fff;
-      padding: 12px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .expired {
-      display: none;
-      padding: 35px 20px 45px;
-      text-align: center;
-    }
-
-    .expired h2 { margin-bottom: 8px; }
-    .expired p { color: #68717b; font-size: 14px; }
-
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 25px;
-      transform: translateX(-50%) translateY(20px);
-      background: #25262b;
-      color: #fff;
-      padding: 10px 15px;
-      border-radius: 7px;
-      font-size: 13px;
-      opacity: 0;
-      transition: .25s;
-      pointer-events: none;
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    @media (max-width: 480px) {
-      .overlay { padding: 0; }
-      .payment-card {
-        width: 100%;
-        min-height: 100vh;
-        border-radius: 0;
-      }
-      .content { max-height: none; }
-    }
-  </style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/stylesheet.css">
 </head>
 <body>
+	<!-- The following line is used for the background particles -->
+	<div id="tsparticles"></div>
 
-<div class="overlay">
-  <div class="payment-card">
+	<div class="container">
+		<div class="logo">
+			<!-- In the img folder, upload your logo -->
+			<!-- Make sure you name it 'logo.png' or update the code below -->
+			<img src="img/logo.png" alt="MyServer logo">
+		</div>
 
-    <div class="topbar">
-      <div class="logo">Payment Manualy</div>
-      <button class="close" onclick="window.history.back()" aria-label="Tutup">×</button>
-    </div>
+		<div class="items">
+			<!-- Replace # with your Discord invite URL-->
+			<a href="#" class="item">
+			<div>
+				<img src="img/forums.png" alt="Minecraft forums icon" class="img">
+				<p class="subtitle">chat on our</p>
+				<p class="title">Discord</p>
+			</div>
+			</a>
 
-    <div id="paymentArea">
-      <div class="summary">
-        <!-- Ubah nominal di sini -->
-        <div class="amount" id="amount">Memuat...</div>
-        <span class="order">Order ID #<span id="orderId"></span></span>
-      </div>
+			<!-- Replace # with your store URL -->
+			<a href="#" class="item">
+			<div>
+				<img src="img/store.png" alt="Minecraft store icon" class="img">
+				<p class="subtitle">donate on our</p>
+				<p class="title">Store</p>
+			</div>
+			</a>
 
-      <div class="countdown">
-        Bayar dalam&nbsp; <span id="timer">03:00:00</span>
-      </div>
+			<!-- Replace # with your vote URL -->
+			<a href="#" class="item">
+			<div>
+				<img src="img/vote.png" alt="Minecraft voting icon" class="img">
+				<p class="subtitle">support us by</p>
+				<p class="title">Voting</p>
+			</div>
+			</a>
 
-      <div class="content">
-        <h3 class="title">Pembayaran Manual</h3>
+		</div>
 
-        <div class="methods">
-          <div class="method">
-            <div class="method-title">DANA</div>
-            <div class="number-row">
-              <div class="number">0882008612013</div>
-              <button class="copy" onclick="copyText('0882008612013')">Salin</button>
-            </div>
-            <div class="note">Silakan transfer sesuai nominal pembayaran.</div>
-          </div>
+		<div class="playercount" id="playercount">
+			<!-- Replace play.cubecraft.net with your server IP address -->
+			<!-- Do it on both line 69 and line 70 -->
+			<!-- Please set both your IP and port -->
+			<p>Join <span id="sip" data-ip="play.cubecraft.net" data-port="25565">
+			</span> other players on <span id="ip">play.cubecraft.net</span></p>
+		</div>
+	</div>
 
-          <div class="method">
-            <div class="method-title">GoPay</div>
-            <div class="number-row">
-              <div class="number">0882008612013</div>
-              <button class="copy" onclick="copyText('0882008612013')">Salin</button>
-            </div>
-            <div class="note">Pastikan nomor tujuan benar sebelum mengirim pembayaran.</div>
-          </div>
-        </div>
-
-        <div class="qr-section">
-          <div class="qr-title">QRIS</div>
-
-          <!--
-            GANTI URL DI JAVASCRIPT:
-            const QRIS_URL = "LINK_QRIS_ANDA";
-            Contoh:
-            const QRIS_URL = "https://domainanda.com/qris.png";
-          -->
-          <div id="qrPlaceholder" class="qr-placeholder">
-            QRIS belum diatur.<br>
-            Masukkan link gambar QRIS Anda pada variabel <b>QRIS_URL</b>.
-          </div>
-          <img id="qrisImage" alt="QRIS Pembayaran" style="display:none;">
-
-          <button class="download" id="downloadBtn" onclick="downloadQR()" style="display:none;">
-            Lihat QRIS
-          </button>
-        </div>
-
-        <details class="instruction" open>
-          <summary>❓ Cara bayar</summary>
-          <ol>
-            <li>Pilih salah satu metode pembayaran: DANA, GoPay, atau QRIS.</li>
-            <li>Transfer <b>sesuai nominal yang tertera di halaman</b>.</li>
-            <li>Pastikan nomor tujuan atau QRIS sudah benar.</li>
-            <li>Simpan bukti pembayaran.</li>
-            <li>Setelah pembayaran, Kirim Bukti Tranfer ke <b>Admin</b>.</li>
-          </ol>
-        </details>
-
-        <button class="status" onclick="checkStatus()">Cek status</button>
-      </div>
-    </div>
-
-    <div id="expiredArea" class="expired">
-      <h2>Waktu pembayaran habis</h2>
-      <p>Batas waktu pembayaran 3 jam telah berakhir. Silakan buat transaksi baru.</p>
-    </div>
-
-  </div>
-</div>
-
-<div id="toast" class="toast"></div>
-
-<script>
-  /*
-   * ==============================
-   * PENGATURAN
-   * ==============================
-   */
-
-  // Nominal pembayaran.
-  // Bisa juga dibuat dinamis melalui URL:
-  // halaman.html?amount=15000
-  const DEFAULT_AMOUNT = 1000;
-
-  // GANTI DENGAN LINK GAMBAR QRIS ANDA NANTI.
-  // Contoh:
-  // const QRIS_URL = "https://domainanda.com/qris.png";
-  const QRIS_URL = "https://files.catbox.moe/cjyw52.png";
-
-  // Waktu pembayaran: 3 jam = 10.800 detik
-  const PAYMENT_DURATION = 3 * 60 * 60;
-
-  /*
-   * ==============================
-   * SISTEM
-   * ==============================
-   */
-
-  const params = new URLSearchParams(window.location.search);
-  const urlAmount = Number(params.get("amount"));
-  const amount = Number.isFinite(urlAmount) && urlAmount > 0
-    ? urlAmount
-    : DEFAULT_AMOUNT;
-
-  document.getElementById("amount").textContent =
-    "Rp" + new Intl.NumberFormat("id-ID").format(amount);
-
-  // Order ID otomatis
-  const randomPart = Math.random().toString(36).substring(2, 10).toUpperCase();
-  document.getElementById("orderId").textContent =
-    "TOPUP-" + Date.now().toString(36).toUpperCase() + "-" + randomPart;
-
-  // Tampilkan QRIS jika link sudah diisi
-  const qrImage = document.getElementById("qrisImage");
-  const qrPlaceholder = document.getElementById("qrPlaceholder");
-  const downloadBtn = document.getElementById("downloadBtn");
-
-  if (QRIS_URL.trim() !== "") {
-    qrImage.src = QRIS_URL;
-    qrImage.style.display = "block";
-    qrPlaceholder.style.display = "none";
-    downloadBtn.style.display = "block";
-
-    qrImage.onerror = function() {
-      qrImage.style.display = "none";
-      qrPlaceholder.style.display = "flex";
-      qrPlaceholder.innerHTML =
-        "QRIS gagal dimuat.<br>Periksa kembali link QRIS Anda.";
-      downloadBtn.style.display = "none";
-    };
-  }
-
-  // Timer dimulai saat halaman pertama kali dibuka.
-  // Disimpan di sessionStorage supaya refresh tidak mengulang 3 jam.
-  const STORAGE_KEY = "payment_start_time";
-  let startTime = sessionStorage.getItem(STORAGE_KEY);
-
-  if (!startTime) {
-    startTime = Date.now();
-    sessionStorage.setItem(STORAGE_KEY, startTime);
-  } else {
-    startTime = Number(startTime);
-  }
-
-  function updateTimer() {
-    const elapsed = Math.floor((Date.now() - startTime) / 1000);
-    const remaining = Math.max(0, PAYMENT_DURATION - elapsed);
-
-    const hours = Math.floor(remaining / 3600);
-    const minutes = Math.floor((remaining % 3600) / 60);
-    const seconds = remaining % 60;
-
-    document.getElementById("timer").textContent =
-      String(hours).padStart(2, "0") + ":" +
-      String(minutes).padStart(2, "0") + ":" +
-      String(seconds).padStart(2, "0");
-
-    if (remaining <= 0) {
-      clearInterval(timerInterval);
-      document.getElementById("paymentArea").style.display = "none";
-      document.getElementById("expiredArea").style.display = "block";
-    }
-  }
-
-  updateTimer();
-  const timerInterval = setInterval(updateTimer, 1000);
-
-  async function copyText(text) {
-    try {
-      await navigator.clipboard.writeText(text);
-      showToast("Nomor berhasil disalin");
-    } catch (e) {
-      // Fallback untuk browser yang memblokir Clipboard API
-      const input = document.createElement("input");
-      input.value = text;
-      document.body.appendChild(input);
-      input.select();
-      document.execCommand("copy");
-      input.remove();
-      showToast("Nomor berhasil disalin");
-    }
-  }
-
-  function downloadQR() {
-    if (!QRIS_URL) return;
-
-    const link = document.createElement("a");
-    link.href = QRIS_URL;
-    link.download = "qris-pembayaran.png";
-    link.target = "_blank";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-  }
-
-  function checkStatus() {
-    showToast("Segera Kirim Untuk Mevalidasi Transaksi mu!");
-    // Jika nanti sudah mempunyai API pengecekan otomatis,
-    // bagian ini bisa dihubungkan ke API Anda.
-  }
-
-  function showToast(message) {
-    const toast = document.getElementById("toast");
-    toast.textContent = message;
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 1800);
-  }
-  <a id="waButton" target="_blank">
-  Kirim Bukti Pembayaran
-</a>
-
-<script>
-const nomorPenjual = "62882008612013";
-
-const params = new URLSearchParams(location.search);
-const price = params.get("price") || "-";
-const reference = params.get("external_reference") || "-";
-
-const pesan =
-`Halo, saya sudah melakukan pembayaran.
-
-Order ID: ${reference}
-Nominal: Rp${Number(price).toLocaleString("id-ID")}
-
-Saya mengirim bukti pembayaran untuk transaksi tersebut.`;
-
-document.getElementById("waButton").href =
-  "https://wa.me/" + nomorPenjual +
-  "?text=" + encodeURIComponent(pesan);
-</script>
-
+	<script src="js/firefly.js" type="text/javascript"></script>
+	<script src="js/main.js" type="text/javascript"></script>
 </body>
 </html>
