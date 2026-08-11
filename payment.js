@@ -1,4 +1,3 @@
-const DEFAULT_AMOUNT = 1000;
 const QRIS_URL = "https://files.catbox.moe/cjyw52.png";
 const PAYMENT_DURATION = 3 * 60 * 60;
 
@@ -11,7 +10,6 @@ const reference = params.get("reference") || "UNKNOWN";
 // Nominal
 const amount = Number.isFinite(price) && price > 0
   ? price
-  : DEFAULT_AMOUNT;
 
 document.getElementById("amount").textContent =
   "Rp" + new Intl.NumberFormat("id-ID").format(amount);
