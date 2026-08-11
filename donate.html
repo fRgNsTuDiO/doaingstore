@@ -33,169 +33,412 @@
 		</div>
 
 		<style>
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    width: 100%;
-    max-width: 1100px;
-    margin: auto;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.product-card {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 12px;
-	color: #ffffff;
-    padding: 20px;
-    text-align: center;
-    overflow: hidden;
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-
-.product-card:hover {
-    transform: scale(1.04);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-}
-
-.product-image {
-    width: 100%;
-    aspect-ratio: 20 / 5;
-    object-fit: cover;
-    border-radius: 8px;
-    display: block;
-    transition: transform 0.45s ease;
-}
-
-.product-card:hover .product-image {
-    transform: scale(1.08);
-}
-
-.product-title {
-    margin: 14px 0 8px;
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.product-price {
-    margin-bottom: 14px;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.buy-button {
-    display: inline-block;
-    padding: 10px 22px;
-    border-radius: 7px;
-    text-decoration: none;
-    font-weight: 600;
-    background: #ffffff;
-    color: #000000;
-    transition: 0.25s ease;
-}
-
-.buy-button:hover {
-    transform: scale(1.05);
-    opacity: 0.85;
-}
-
-/* HP */
-@media (max-width: 700px) {
-    .product-grid {
-        grid-template-columns: 1fr;
+    * {
+        box-sizing: border-box;
     }
-}
+
+    body {
+        margin: 0;
+        background: #000;
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 700px;
+        margin: 27px auto 0;
+        padding: 0 10px 40px;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 42px;
+        line-height: 1;
+        font-weight: 700;
+        margin: 0 0 27px;
+    }
+
+    .products {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 46px;
+        row-gap: 57px;
+    }
+
+    .product {
+        width: 196px;
+        text-align: left;
+    }
+
+    .product-name {
+        text-align: center;
+        font-size: 27px;
+        font-weight: 700;
+        margin: 0 0 3px;
+        line-height: 1.1;
+    }
+
+    .product-image {
+        display: block;
+        width: 145px;
+        height: 137px;
+        margin: 0 auto 3px;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    .price {
+        text-align: left;
+        font-size: 27px;
+        font-weight: 700;
+        margin: 0 0 6px;
+        line-height: 1.05;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 9px;
+        align-items: center;
+    }
+
+    .btn {
+        height: 43px;
+        border: 0;
+        border-radius: 10px;
+        background: #fff;
+        color: #000;
+        font-size: 21px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform .15s ease;
+    }
+
+    .btn:hover {
+        transform: scale(1.04);
+    }
+
+    .info-btn {
+        width: 42px;
+    }
+
+    .buy-btn {
+        width: 91px;
+    }
+
+    /* POPUP */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.72);
+        z-index: 9999;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 18px;
+    }
+
+    .modal-overlay.show {
+        display: flex;
+    }
+
+    .modal {
+        position: relative;
+        width: min(673px, calc(100vw - 30px));
+        min-height: 587px;
+        background: rgba(255, 0, 0, 0.28);
+        border: 1px solid rgba(255, 255, 255, 0.20);
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-radius: 12px;
+        padding: 8px 14px 20px;
+        color: #fff;
+        overflow: hidden;
+    }
+
+    .modal-title {
+        text-align: center;
+        font-size: 52px;
+        line-height: 1;
+        font-weight: 700;
+        margin: 0 0 17px;
+    }
+
+    .close {
+        position: absolute;
+        top: 6px;
+        right: 14px;
+        border: 0;
+        background: transparent;
+        color: #fff;
+        font-size: 38px;
+        line-height: 1;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .benefits {
+        margin: 0;
+        padding-left: 27px;
+        font-size: 31px;
+        line-height: 1.34;
+        font-weight: 700;
+    }
+
+    @media (max-width: 760px) {
+        .container {
+            max-width: 680px;
+        }
+
+        .products {
+            column-gap: 10px;
+        }
+
+        .product {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 560px) {
+        .title {
+            font-size: 34px;
+        }
+
+        .products {
+            grid-template-columns: repeat(2, 1fr);
+            row-gap: 45px;
+        }
+
+        .product-name,
+        .price {
+            font-size: 23px;
+        }
+
+        .product-image {
+            width: 135px;
+            height: 125px;
+        }
+
+        .modal {
+            min-height: auto;
+        }
+
+        .modal-title {
+            font-size: 42px;
+        }
+
+        .benefits {
+            font-size: 22px;
+        }
+    }
 </style>
 </head>
 
 <body>
 
-<div class="product-grid">
+<div class="container">
+    <h1 class="title">Katagory</h1>
 
-    <!-- PRODUK 1 -->
-    <div class="product-card">
+    <div class="products">
 
-        <a href="https://contoh-link-gambar-1.com" target="_blank">
-            <img
-                class="product-image"
-                src="https://files.catbox.moe/ce9208.png"
-                alt="Produk 1">
-        </a>
-
-        <div class="product-title">
-            Title Produk 1
+        <!-- PRODUK 1 -->
+        <div class="product">
+            <div class="product-name">Gakusei</div>
+            <img class="product-image"
+                 src="https://LINK-GAMBAR-1.com/logo.png"
+                 alt="Gakusei">
+            <div class="price">Rp. 15.000</div>
+            <div class="buttons">
+                <button class="btn info-btn" onclick="showDetail(0)">i</button>
+                <button class="btn buy-btn" onclick="buyProduct(0)">Beli</button>
+            </div>
         </div>
 
-        <div class="product-price">
-            Rp 15.000
+        <!-- PRODUK 2 -->
+        <div class="product">
+            <div class="product-name">Gakusei</div>
+            <img class="product-image"
+                 src="https://LINK-GAMBAR-2.com/logo.png"
+                 alt="Gakusei">
+            <div class="price">Rp. 15.000</div>
+            <div class="buttons">
+                <button class="btn info-btn" onclick="showDetail(1)">i</button>
+                <button class="btn buy-btn" onclick="buyProduct(1)">Beli</button>
+            </div>
         </div>
 
-        <a
-            class="buy-button"
-            href="https://contoh-link-buy-1.com"
-            target="_blank">
-            Buy Now
-        </a>
+        <!-- PRODUK 3 -->
+        <div class="product">
+            <div class="product-name">Gakusei</div>
+            <img class="product-image"
+                 src="https://LINK-GAMBAR-3.com/logo.png"
+                 alt="Gakusei">
+            <div class="price">Rp. 15.000</div>
+            <div class="buttons">
+                <button class="btn info-btn" onclick="showDetail(2)">i</button>
+                <button class="btn buy-btn" onclick="buyProduct(2)">Beli</button>
+            </div>
+        </div>
+
+        <!-- PRODUK 4 -->
+        <div class="product">
+            <div class="product-name">Gakusei</div>
+            <img class="product-image"
+                 src="https://LINK-GAMBAR-4.com/logo.png"
+                 alt="Gakusei">
+            <div class="price">Rp. 15.000</div>
+            <div class="buttons">
+                <button class="btn info-btn" onclick="showDetail(3)">i</button>
+                <button class="btn buy-btn" onclick="buyProduct(3)">Beli</button>
+            </div>
+        </div>
+
+        <!-- PRODUK 5 -->
+        <div class="product">
+            <div class="product-name">Gakusei</div>
+            <img class="product-image"
+                 src="https://LINK-GAMBAR-5.com/logo.png"
+                 alt="Gakusei">
+            <div class="price">Rp. 15.000</div>
+            <div class="buttons">
+                <button class="btn info-btn" onclick="showDetail(4)">i</button>
+                <button class="btn buy-btn" onclick="buyProduct(4)">Beli</button>
+            </div>
+        </div>
+
+        <!-- PRODUK 6 -->
+        <div class="product">
+            <div class="product-name">Gakusei</div>
+            <img class="product-image"
+                 src="https://LINK-GAMBAR-6.com/logo.png"
+                 alt="Gakusei">
+            <div class="price">Rp. 15.000</div>
+            <div class="buttons">
+                <button class="btn info-btn" onclick="showDetail(5)">i</button>
+                <button class="btn buy-btn" onclick="buyProduct(5)">Beli</button>
+            </div>
+        </div>
 
     </div>
+</div>
 
+<!-- POPUP DETAIL -->
+<div id="detailModal" class="modal-overlay" onclick="closeOutside(event)">
+    <div class="modal">
 
-    <!-- PRODUK 2 -->
-    <div class="product-card">
+        <button class="close" onclick="closeDetail()">×</button>
 
-        <a href="https://contoh-link-gambar-2.com" target="_blank">
-            <img
-                class="product-image"
-                src="https://via.placeholder.com/600x350"
-                alt="Produk 2">
-        </a>
+        <h2 class="modal-title">Detail</h2>
 
-        <div class="product-title">
-            Title Produk 2
-        </div>
-
-        <div class="product-price">
-            Rp 25.000
-        </div>
-
-        <a
-            class="buy-button"
-            href="https://contoh-link-buy-2.com"
-            target="_blank">
-            Buy Now
-        </a>
+        <ul class="benefits" id="benefitsList"></ul>
 
     </div>
+</div>
 
+<script>
+    /*
+      ==========================================================
+      EDIT BAGIAN INI
+      ==========================================================
+    */
 
-    <!-- PRODUK 3 -->
-    <div class="product-card">
+    const products = [
+        {
+            buyLink: "https://LINK-BELI-1.com",
+            benefits: [
+                "Mendapatkan Uang In-Game",
+                "Spesial Prefix",
+                "Kit Premium",
+                "Akses Role Premium Di Discord",
+                "Dan Benefit lainnya"
+            ]
+        },
+        {
+            buyLink: "https://LINK-BELI-2.com",
+            benefits: [
+                "Mendapatkan Uang In-Game",
+                "Spesial Prefix",
+                "Kit Premium",
+                "Akses Role Premium Di Discord",
+                "Dan Benefit lainnya"
+            ]
+        },
+        {
+            buyLink: "https://LINK-BELI-3.com",
+            benefits: [
+                "Mendapatkan Uang In-Game",
+                "Spesial Prefix",
+                "Kit Premium",
+                "Akses Role Premium Di Discord",
+                "Dan Benefit lainnya"
+            ]
+        },
+        {
+            buyLink: "https://LINK-BELI-4.com",
+            benefits: [
+                "Mendapatkan Uang In-Game",
+                "Spesial Prefix",
+                "Kit Premium",
+                "Akses Role Premium Di Discord",
+                "Dan Benefit lainnya"
+            ]
+        },
+        {
+            buyLink: "https://LINK-BELI-5.com",
+            benefits: [
+                "Mendapatkan Uang In-Game",
+                "Spesial Prefix",
+                "Kit Premium",
+                "Akses Role Premium Di Discord",
+                "Dan Benefit lainnya"
+            ]
+        },
+        {
+            buyLink: "https://LINK-BELI-6.com",
+            benefits: [
+                "Mendapatkan Uang In-Game",
+                "Spesial Prefix",
+                "Kit Premium",
+                "Akses Role Premium Di Discord",
+                "Dan Benefit lainnya"
+            ]
+        }
+    ];
 
-        <a href="https://contoh-link-gambar-3.com" target="_blank">
-            <img
-                class="product-image"
-                src="https://via.placeholder.com/600x350"
-                alt="Produk 3">
-        </a>
+    function showDetail(index) {
+        const list = document.getElementById("benefitsList");
+        list.innerHTML = "";
 
-        <div class="product-title">
-            Title Produk 3
-        </div>
+        products[index].benefits.forEach(function(item) {
+            const li = document.createElement("li");
+            li.textContent = item;
+            list.appendChild(li);
+        });
 
-        <div class="product-price">
-            Rp 50.000
-        </div>
+        document.getElementById("detailModal").classList.add("show");
+    }
 
-        <a class="buy-button"
-            href="https://contoh-link-buy-3.com"
-            target="_blank">
-            Buy Now
-        </a>
+    function closeDetail() {
+        document.getElementById("detailModal").classList.remove("show");
+    }
 
+    function closeOutside(event) {
+        if (event.target === document.getElementById("detailModal")) {
+            closeDetail();
+        }
+    }
+
+    function buyProduct(index) {
+        window.location.href = products[index].buyLink;
+    }
+
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Escape") {
+            closeDetail();
+        }
+    });
+</script>
     </div>
 	
 		<div class="playercount" id="playercount">
