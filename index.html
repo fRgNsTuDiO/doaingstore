@@ -517,6 +517,28 @@
     toast.classList.add("show");
     setTimeout(() => toast.classList.remove("show"), 1800);
   }
+  <a id="waButton" target="_blank">
+  Kirim Bukti Pembayaran
+</a>
+
+<script>
+const nomorPenjual = "62882008612013";
+
+const params = new URLSearchParams(location.search);
+const price = params.get("price") || "-";
+const reference = params.get("external_reference") || "-";
+
+const pesan =
+`Halo, saya sudah melakukan pembayaran.
+
+Order ID: ${reference}
+Nominal: Rp${Number(price).toLocaleString("id-ID")}
+
+Saya mengirim bukti pembayaran untuk transaksi tersebut.`;
+
+document.getElementById("waButton").href =
+  "https://wa.me/" + nomorPenjual +
+  "?text=" + encodeURIComponent(pesan);
 </script>
 
 </body>
