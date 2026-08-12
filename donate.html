@@ -34,7 +34,6 @@
 
 	<div id="doaing-products">
 <style>
-        /* --- Reset & Font Dasar --- */
         * {
             margin: 0;
             padding: 0;
@@ -43,7 +42,7 @@
         }
 
         body {
-            background-color: #000; /* Latar belakang hitam pekat */
+            background-color: #0d0d0d;
             color: white;
             display: flex;
             flex-direction: column;
@@ -52,67 +51,66 @@
             padding: 40px 20px;
         }
 
-        /* --- Gaya Judul Utama --- */
-        h1.main-title {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 40px;
-            letter-spacing: 1px;
+        /* --- Judul Utama --- */
+        .main-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
         }
 
-        /* --- Grid Container Produk --- */
+        /* --- Grid 3 Kolom --- */
         .container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 Kolom */
-            gap: 30px;
-            max-width: 1000px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 900px;
             width: 100%;
+            margin: 0 auto;
         }
 
-        /* --- Gaya Kotakan Produk (Glassmorphism Hitam) --- */
+        /* --- Kotak Produk Glassmorphism Hitam --- */
         .item {
-            background: rgba(255, 255, 255, 0.05); /* Putih sangat transparan */
-            backdrop-filter: blur(10px); /* Efek blur kaca */
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 25px;
+            background: rgba(20, 20, 20, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            padding: 20px 15px;
             text-align: center;
-            /* Efek Transisi untuk Zoom */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
         }
 
-        /* --- Efek Zoom saat Mouse Diatas --- */
+        /* Efek Zoom saat Mouse Hover */
         .item:hover {
-            transform: scale(1.05); /* Zoom in sedikit */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-            background: rgba(255, 255, 255, 0.08); /* Sedikit lebih terang saat hover */
+            transform: scale(1.06);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
-        /* --- Elemen di dalam Item --- */
         .item-name {
             font-size: 1.1rem;
-            margin-bottom: 15px;
-            font-weight: 500;
+            font-weight: 600;
+            margin-bottom: 12px;
         }
 
         .item-image {
-            width: 120px;
-            height: auto;
-            margin-bottom: 15px;
-            display: block;
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 12px;
         }
 
         .item-price {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 20px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 15px;
         }
 
-        /* --- Container Tombol --- */
+        /* --- Tombol "i" & "Beli" --- */
         .item-buttons {
             display: flex;
             gap: 10px;
@@ -120,169 +118,138 @@
             justify-content: center;
         }
 
-        /* --- Gaya Dasar Tombol --- */
-        .btn {
+        .btn-info {
+            background-color: #ffffff;
+            color: #000;
             border: none;
+            width: 38px;
+            height: 38px;
             border-radius: 8px;
-            padding: 10px 20px;
             font-weight: bold;
+            font-size: 1rem;
             cursor: pointer;
-            transition: background 0.2s ease;
-            font-size: 0.9rem;
-            text-decoration: none; /* Untuk link 'Beli' */
+            transition: background-color 0.2s;
+        }
+
+        .btn-beli {
+            background-color: #ffffff;
+            color: #000;
+            border: none;
+            padding: 0 20px;
+            height: 38px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            transition: background-color 0.2s;
         }
 
-        /* Tombol 'i' */
-        .btn-info {
-            background-color: white;
-            color: black;
-            width: 40px; /* Membuatnya kotak */
-            padding: 10px 0;
-        }
-
-        .btn-info:hover {
-            background-color: #e0e0e0;
-        }
-
-        /* Tombol 'Beli' */
-        .btn-beli {
-            background-color: white;
-            color: black;
-            flex-grow: 1; /* Mengisi sisa ruang */
-            max-width: 120px;
-        }
-
-        .btn-beli:hover {
+        .btn-info:hover, .btn-beli:hover {
             background-color: #e0e0e0;
         }
 
         /* =========================================
-           --- PERBAIKAN STYLING POP-UP (MODAL) ---
-           Sesuai Gambar 2 (Glassmorphism Merah)
+           --- POP-UP (MODAL GLASSMERAH TRANSPARAN) ---
            ========================================= */
-        
-        /* Overlay Latar Belakang (Gelap) */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Gelap transparan */
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
-            /* Sembunyikan secara default */
+            z-index: 9999;
             opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
         }
 
-        /* Tampilkan Overlay */
-        .modal-overlay.open {
+        .modal-overlay.active {
             opacity: 1;
-            visibility: visible;
+            pointer-events: auto;
         }
 
-        /* Kotak Konten Pop-up (Glassmorphism Merah) */
         .modal-content {
-            /* Warna dasar merah muda/kebapakan sesuai gambar */
-            background: rgba(255, 131, 131, 0.6); 
-            backdrop-filter: blur(15px); /* Efek blur kaca kuat */
-            -webkit-backdrop-filter: blur(15px);
-            
-            color: white; /* Teks putih */
+            /* Glassmorphism Merah Transparan */
+            background: rgba(255, 115, 115, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            padding: 25px 30px;
             width: 90%;
-            max-width: 500px; /* Lebar maksimal */
-            border-radius: 15px;
-            padding: 30px;
+            max-width: 420px;
+            color: #ffffff;
             position: relative;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            
-            /* Animasi muncul */
-            transform: scale(0.8);
-            transition: transform 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transform: scale(0.85);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Animasi konten saat terbuka */
-        .modal-overlay.open .modal-content {
+        .modal-overlay.active .modal-content {
             transform: scale(1);
         }
 
-        /* Header Pop-up (Detail & X) */
         .modal-header {
             display: flex;
-            justify-content: center; /* Judul di tengah */
+            justify-content: center;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             position: relative;
         }
 
-        .modal-title {
+        .modal-header h2 {
             font-size: 1.8rem;
-            font-weight: 600;
+            font-weight: 700;
         }
 
-        /* Tombol Tutup (X) di pojok kanan atas */
-        .close-modal {
+        .close-btn {
+            position: absolute;
+            right: 0;
+            top: -5px;
             background: none;
             border: none;
             color: white;
             font-size: 1.5rem;
             font-weight: bold;
             cursor: pointer;
-            position: absolute;
-            right: 0;
-            top: 0;
-            opacity: 0.8;
-            transition: opacity 0.2s ease;
         }
 
-        .close-modal:hover {
-            opacity: 1;
-        }
-
-        /* List Benefit */
         .benefit-list {
-            list-style: none; /* Hapus bullet default */
-            font-size: 1rem;
-            line-height: 1.6;
+            list-style: none;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            font-weight: 600;
         }
 
-        /* Kustomisasi Bullet Point Putih */
         .benefit-list li {
             position: relative;
-            padding-left: 25px; /* Ruang untuk bullet */
-            margin-bottom: 8px;
+            padding-left: 20px;
         }
 
         .benefit-list li::before {
-            content: "•"; /* Karakter bullet */
-            color: white; /* Warna bullet putih */
-            font-size: 1.2rem;
+            content: "•";
             position: absolute;
             left: 0;
-            top: -2px;
+            color: white;
+            font-size: 1.2rem;
         }
 
-        /* --- Media Query untuk HP --- */
+        /* Responsive Mobile */
         @media (max-width: 768px) {
             .container {
-                grid-template-columns: repeat(2, 1fr); /* 2 Kolom di tablet */
+                grid-template-columns: repeat(2, 1fr);
             }
         }
-
         @media (max-width: 480px) {
             .container {
-                grid-template-columns: 1fr; /* 1 Kolom di HP */
-            }
-            h1.main-title {
-                font-size: 2rem;
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -291,19 +258,105 @@
 
     <h1 class="main-title">Katagory</h1>
 
-    <!-- Container Grid Produk -->
-    <div class="container" id="product-container">
-        <!-- Item produk akan dimasukkan di sini oleh JavaScript -->
+    <div class="container">
+        <!-- ITEM 1 -->
+        <div class="item">
+            <div class="item-name">Gakusei</div>
+            <!-- Menggunakan Icon SVG Minecraft/Sakura sederhana sebagai pengganti gambar yang error -->
+            <svg class="item-image" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" rx="15" fill="#2a1b2a"/>
+                <circle cx="50" cy="40" r="25" fill="#e91e63" opacity="0.8"/>
+                <path d="M30 75 L50 45 L70 75 Z" fill="#ff4081"/>
+            </svg>
+            <div class="item-price">Rp. 15.000</div>
+            <div class="item-buttons">
+                <button class="btn-info" onclick="openModal()">i</button>
+                <a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
+            </div>
+        </div>
+
+        <!-- ITEM 2 -->
+        <div class="item">
+            <div class="item-name">Gakusei</div>
+            <svg class="item-image" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" rx="15" fill="#2a1b2a"/>
+                <circle cx="50" cy="40" r="25" fill="#e91e63" opacity="0.8"/>
+                <path d="M30 75 L50 45 L70 75 Z" fill="#ff4081"/>
+            </svg>
+            <div class="item-price">Rp. 15.000</div>
+            <div class="item-buttons">
+                <button class="btn-info" onclick="openModal()">i</button>
+                <a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
+            </div>
+        </div>
+
+        <!-- ITEM 3 -->
+        <div class="item">
+            <div class="item-name">Gakusei</div>
+            <svg class="item-image" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" rx="15" fill="#2a1b2a"/>
+                <circle cx="50" cy="40" r="25" fill="#e91e63" opacity="0.8"/>
+                <path d="M30 75 L50 45 L70 75 Z" fill="#ff4081"/>
+            </svg>
+            <div class="item-price">Rp. 15.000</div>
+            <div class="item-buttons">
+                <button class="btn-info" onclick="openModal()">i</button>
+                <a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
+            </div>
+        </div>
+
+        <!-- ITEM 4 -->
+        <div class="item">
+            <div class="item-name">Gakusei</div>
+            <svg class="item-image" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" rx="15" fill="#2a1b2a"/>
+                <circle cx="50" cy="40" r="25" fill="#e91e63" opacity="0.8"/>
+                <path d="M30 75 L50 45 L70 75 Z" fill="#ff4081"/>
+            </svg>
+            <div class="item-price">Rp. 15.000</div>
+            <div class="item-buttons">
+                <button class="btn-info" onclick="openModal()">i</button>
+                <a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
+            </div>
+        </div>
+
+        <!-- ITEM 5 -->
+        <div class="item">
+            <div class="item-name">Gakusei</div>
+            <svg class="item-image" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" rx="15" fill="#2a1b2a"/>
+                <circle cx="50" cy="40" r="25" fill="#e91e63" opacity="0.8"/>
+                <path d="M30 75 L50 45 L70 75 Z" fill="#ff4081"/>
+            </svg>
+            <div class="item-price">Rp. 15.000</div>
+            <div class="item-buttons">
+                <button class="btn-info" onclick="openModal()">i</button>
+                <a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
+            </div>
+        </div>
+
+        <!-- ITEM 6 -->
+        <div class="item">
+            <div class="item-name">Gakusei</div>
+            <svg class="item-image" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" rx="15" fill="#2a1b2a"/>
+                <circle cx="50" cy="40" r="25" fill="#e91e63" opacity="0.8"/>
+                <path d="M30 75 L50 45 L70 75 Z" fill="#ff4081"/>
+            </svg>
+            <div class="item-price">Rp. 15.000</div>
+            <div class="item-buttons">
+                <button class="btn-info" onclick="openModal()">i</button>
+                <a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
+            </div>
+        </div>
     </div>
 
-    <!-- =========================================
-       --- STRUKTUR HTML POP-UP (MODAL) ---
-       ========================================= -->
-    <div class="modal-overlay" id="modalOverlay">
+    <!-- POP-UP MODAL MERAH -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Detail</h2>
-                <button class="close-modal" id="closeModal">X</button>
+                <h2>Detail</h2>
+                <button class="close-btn" onclick="closeModal()">X</button>
             </div>
             <ul class="benefit-list">
                 <li>Mendapatkan Uang In-Game</li>
@@ -323,72 +376,19 @@
     </div>
 
     <script>
-        // --- Data Produk (Agar mudah diubah) ---
-        const products = [
-            { name: "Gakusei", price: "Rp. 15.000", image: "https://i.imgur.com/8Q9N38E.png", buyLink: "#link-beli-1" },
-            { name: "Gakusei", price: "Rp. 15.000", image: "https://i.imgur.com/8Q9N38E.png", buyLink: "#link-beli-2" },
-            { name: "Gakusei", price: "Rp. 15.000", image: "https://i.imgur.com/8Q9N38E.png", buyLink: "#link-beli-3" },
-            { name: "Gakusei", price: "Rp. 15.000", image: "https://i.imgur.com/8Q9N38E.png", buyLink: "#link-beli-4" },
-            { name: "Gakusei", price: "Rp. 15.000", image: "https://i.imgur.com/8Q9N38E.png", buyLink: "#link-beli-5" },
-            { name: "Gakusei", price: "Rp. 15.000", image: "https://i.imgur.com/8Q9N38E.png", buyLink: "#link-beli-6" }
-        ];
-
-        // --- Mendistribusikan Produk ke HTML ---
-        const container = document.getElementById('product-container');
-
-        products.forEach(product => {
-            const productHtml = `
-                <div class="item">
-                    <div class="item-name">${product.name}</div>
-                    <img src="${product.image}" alt="${product.name}" class="item-image">
-                    <div class="item-price">${product.price}</div>
-                    <div class="item-buttons">
-                        <button class="btn btn-info open-info-btn">i</button>
-                        <a href="${product.buyLink}" target="_blank" class="btn btn-beli">Beli</a>
-                    </div>
-                </div>
-            `;
-            container.innerHTML += productHtml;
-        });
-
-        // --- Logika Pop-up (Modal) ---
-        const modalOverlay = document.getElementById('modalOverlay');
-        const closeModalBtn = document.getElementById('closeModal');
-        const openInfoButtons = document.querySelectorAll('.open-info-btn');
-
-        // Fungsi Membuka Modal
         function openModal() {
-            modalOverlay.classList.add('open');
-            document.body.style.overflow = 'hidden'; /* Mencegah scroll latar belakang */
+            document.getElementById('modalOverlay').classList.add('active');
         }
 
-        // Fungsi Menutup Modal
         function closeModal() {
-            modalOverlay.classList.remove('open');
-            document.body.style.overflow = ''; /* Mengembalikan scroll */
+            document.getElementById('modalOverlay').classList.remove('active');
         }
 
-        // Event Listener untuk tombol 'i'
-        openInfoButtons.forEach(button => {
-            button.addEventListener('click', openModal);
-        });
-
-        // Event Listener untuk tombol Tutup (X)
-        closeModalBtn.addEventListener('click', closeModal);
-
-        // Event Listener untuk menutup jika klik di luar kotak putih (di overlay)
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) {
+        function closeModalOnBg(event) {
+            if (event.target.id === 'modalOverlay') {
                 closeModal();
             }
-        });
-
-        // Menutup dengan tombol Esc
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modalOverlay.classList.contains('open')) {
-                closeModal();
-            }
-        });
+        }
     </script>
 </div>
 		</div>
