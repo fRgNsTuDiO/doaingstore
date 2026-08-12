@@ -506,11 +506,12 @@
     link.remove();
   }
 
-  function checkStatus() {
-    showToast("https://wa.me/62882008612013?text=*KONFIRMASI%20PEMBAYARAN*%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A*Nickname%3A*%20(nickname_kamu)%0A*Platfrom%3A*%20(Java%2FBedrock)%0A*Nominal%3A*%20Rp.%20(Nominal)%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATransaksi%20akan%20dilakukan%20paling%20lambat%20*3%20Jam%20kerja*%20tergantung%20Jam%20Sibuk%20Admin%2C%20Harap%20bisa%20bersabar%20dan%20kami%20ucapkan%20terimakasih");
-    // Jika nanti sudah mempunyai API pengecekan otomatis,
-    // bagian ini bisa dihubungkan ke API Anda.
-  }
+ function checkStatus() {
+  window.location.href("https://wa.me/62882008612013?text=*KONFIRMASI%20PEMBAYARAN*%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A*Nickname%3A*%20(nickname_kamu)%0A*Platfrom%3A*%20(Java%2FBedrock)%0A*Nominal%3A*%20Rp.%20(Nominal)%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATransaksi%20akan%20dilakukan%20paling%20lambat%20*3%20Jam%20kerja*%20tergantung%20Jam%20Sibuk%20Admin%2C%20Harap%20bisa%20bersabar%20dan%20kami%20ucapkan%20terimakasih", "_blank");
+  
+  // Jika nanti sudah mempunyai API pengecekan otomatis,
+  // bagian ini bisa dihubungkan ke API Anda.
+}
 
   function showToast(message) {
     const toast = document.getElementById("toast");
