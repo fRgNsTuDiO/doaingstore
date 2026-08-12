@@ -45,47 +45,30 @@
             color: white;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Memastikan semua elemen berada di tengah secara horizontal */
+            align-items: center;
             min-height: 100vh;
             padding: 40px 20px;
         }
 
-        /* --- Header / Logo DORAING MC Paling Atas --- */
-        .header-logo {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        /* --- Judul Utama --- */
+        .main-title {
+            font-size: 2.2rem;
+            font-weight: 700;
             margin-bottom: 30px;
             text-align: center;
         }
 
-        .logo-img {
-            max-width: 320px; /* Ukuran logo DoraingMC */
-            width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.7));
-        }
-
-        .main-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-top: 10px;
-        }
-
-        /* --- Grid Container Produk (Dibawah Logo) --- */
+        /* --- Grid 3 Kolom --- */
         .container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 25px;
             max-width: 900px;
             width: 100%;
-            margin: 0 auto; /* Memastikan grid di tengah */
+            margin: 0 auto;
         }
 
-        /* --- Kotakan Produk (Glassmorphism Hitam) --- */
+        /* --- Kotak Produk Glassmorphism Hitam --- */
         .item {
             background: rgba(20, 20, 20, 0.65);
             backdrop-filter: blur(12px);
@@ -96,8 +79,7 @@
             text-align: center;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Gambar & teks di dalam kotak rata tengah */
-            justify-content: center;
+            align-items: center;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
         }
 
@@ -114,13 +96,11 @@
             margin-bottom: 12px;
         }
 
-        /* Gambar Produk Rata Tengah */
         .item-image {
-            width: 110px;
-            height: auto;
+            width: 100px;
+            height: 100px;
             object-fit: contain;
-            margin: 0 auto 12px auto;
-            display: block;
+            margin-bottom: 12px;
         }
 
         .item-price {
@@ -195,6 +175,7 @@
         }
 
         .modal-content {
+            /* Glassmorphism Merah Transparan */
             background: rgba(255, 115, 115, 0.75);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -274,21 +255,13 @@
 </head>
 <body>
 
-    <!-- LOGO DORAING MC DI PALING ATAS -->
-    <div class="header-logo">
-        <!-- Gantilah URL src di bawah jika Anda punya file logo DORAING MC lokal -->
-        <svg class="logo-img" viewBox="0 0 300 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="300" height="80" rx="10" fill="#222" opacity="0.3"/>
-            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#55ff55" font-size="28" font-weight="900" font-family="sans-serif">DORAING MC</text>
-        </svg>
-        <h1 class="main-title">Katagory</h1>
-    </div>
+    <h1 class="main-title">Katagory</h1>
 
-    <!-- GRID KOTAKAN PRODUK DIBAWAH TULISAN/LOGO DORAING MC -->
     <div class="container">
         <!-- ITEM 1 -->
         <div class="item">
             <div class="item-name">Gakusei</div>
+            <!-- Menggunakan Icon SVG Minecraft/Sakura sederhana sebagai pengganti gambar yang error -->
             <svg class="item-image" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="100" height="100" rx="15" fill="#2a1b2a"/>
                 <circle cx="50" cy="40" r="25" fill="#e91e63" opacity="0.8"/>
@@ -377,7 +350,7 @@
         </div>
     </div>
 
-    <!-- POP-UP MODAL GLASS MERAH -->
+    <!-- POP-UP MODAL MERAH -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
         <div class="modal-content">
             <div class="modal-header">
