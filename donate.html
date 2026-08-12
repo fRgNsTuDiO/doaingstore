@@ -20,377 +20,353 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="css/stylesheet.css">
+
+	<style>
+		/* --- CSS KHUSUS STORE (MENCEGAH BENTROK DENGAN TEMPLATE BILLY) --- */
+		
+		/* Judul Katagory */
+		.store-title {
+			font-size: 2.2rem;
+			font-weight: 700;
+			color: #ffffff;
+			margin: 20px 0 30px 0;
+			text-align: center;
+			text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+		}
+
+		/* Grid 3 Kolom Khusus Toko */
+		.store-grid {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 25px;
+			max-width: 950px;
+			width: 100%;
+			margin: 0 auto 50px auto;
+		}
+
+		/* Kotak Produk Glassmorphism Hitam */
+		.store-item {
+			background: rgba(0, 0, 0, 0.55);
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			border-radius: 16px;
+			padding: 20px 15px;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+		}
+
+		/* Efek Zoom saat Mouse Hover */
+		.store-item:hover {
+			transform: scale(1.06);
+			box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+			border-color: rgba(255, 255, 255, 0.3);
+			background: rgba(0, 0, 0, 0.7);
+		}
+
+		.item-name {
+			font-size: 1.15rem;
+			font-weight: 600;
+			color: #ffffff;
+			margin-bottom: 12px;
+		}
+
+		.item-image {
+			width: 110px;
+			height: 110px;
+			object-fit: contain;
+			margin-bottom: 12px;
+		}
+
+		.item-price {
+			font-size: 1.2rem;
+			font-weight: 700;
+			color: #ffffff;
+			margin-bottom: 15px;
+		}
+
+		/* Tombol i & Beli */
+		.item-buttons {
+			display: flex;
+			gap: 10px;
+			width: 100%;
+			justify-content: center;
+		}
+
+		.btn-info {
+			background-color: #ffffff !important;
+			color: #000000 !important;
+			border: none;
+			width: 40px;
+			height: 38px;
+			border-radius: 8px;
+			font-weight: bold;
+			font-size: 1rem;
+			cursor: pointer;
+			transition: background-color 0.2s;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.btn-beli {
+			background-color: #ffffff !important;
+			color: #000000 !important;
+			border: none;
+			padding: 0 20px;
+			height: 38px;
+			border-radius: 8px;
+			font-weight: bold;
+			font-size: 0.95rem;
+			text-decoration: none;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			transition: background-color 0.2s;
+			flex-grow: 1;
+			max-width: 110px;
+		}
+
+		.btn-info:hover, .btn-beli:hover {
+			background-color: #e0e0e0 !important;
+		}
+
+		/* =========================================
+		   --- POP-UP (MODAL GLASSMERAH TRANSPARAN) ---
+		   ========================================= */
+		.modal-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			background: rgba(0, 0, 0, 0.7);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 99999;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 0.3s ease;
+		}
+
+		.modal-overlay.active {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		.modal-content {
+			background: rgba(255, 115, 115, 0.85); /* Glass Red Transparan */
+			backdrop-filter: blur(16px);
+			-webkit-backdrop-filter: blur(16px);
+			border: 1px solid rgba(255, 255, 255, 0.4);
+			border-radius: 16px;
+			padding: 25px 30px;
+			width: 90%;
+			max-width: 420px;
+			color: #ffffff;
+			position: relative;
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+			transform: scale(0.85);
+			transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			text-align: left;
+		}
+
+		.modal-overlay.active .modal-content {
+			transform: scale(1);
+		}
+
+		.modal-header {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-bottom: 20px;
+			position: relative;
+		}
+
+		.modal-header h2 {
+			font-size: 1.8rem;
+			font-weight: 700;
+			color: #ffffff;
+			margin: 0;
+		}
+
+		.close-btn {
+			position: absolute;
+			right: 0;
+			top: -5px;
+			background: none;
+			border: none;
+			color: white;
+			font-size: 1.5rem;
+			font-weight: bold;
+			cursor: pointer;
+		}
+
+		.benefit-list {
+			list-style: none;
+			font-size: 0.95rem;
+			line-height: 1.7;
+			font-weight: 600;
+			padding: 0;
+			margin: 0;
+		}
+
+		.benefit-list li {
+			position: relative;
+			padding-left: 20px;
+			color: #ffffff;
+		}
+
+		.benefit-list li::before {
+			content: "•";
+			position: absolute;
+			left: 0;
+			color: white;
+			font-size: 1.2rem;
+		}
+
+		/* Responsive Mobile */
+		@media (max-width: 768px) {
+			.store-grid {
+				grid-template-columns: repeat(2, 1fr);
+			}
+		}
+		@media (max-width: 480px) {
+			.store-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
 </head>
 <body>
 	<!-- The following line is used for the background particles -->
 	<div id="tsparticles"></div>
 
 	<div class="container">
+		<!-- LOGO DORAING MC PALING ATAS -->
 		<div class="logo">
-			<!-- In the img folder, upload your logo -->
-			<!-- Make sure you name it 'logo.png' or update the code below -->
 			<img src="img/logo.png" alt="Doaing logo">
 		</div>
 		
-<style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+		<!-- JUDUL KATAGORY -->
+		<h1 class="store-title">Katagory</h1>
 
-        body {
-            background-color: #0d0d0d;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
+		<!-- GRID KOTAKAN PRODUK DIBAWAH LOGO -->
+		<div class="store-grid">
+			<!-- ITEM 1 -->
+			<div class="store-item">
+				<div class="item-name">Gakusei</div>
+				<!-- Ganti 'img/logo.png' dibawah dengan lokasi gambar item Anda jika ada -->
+				<img class="item-image" src="img/logo.png" alt="Gakusei">
+				<div class="item-price">Rp. 15.000</div>
+				<div class="item-buttons">
+					<button class="btn-info" onclick="openModal()">i</button>
+					<a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
+				</div>
+			</div>
 
-        /* --- Judul Utama --- */
-        .main-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            text-align: center;
-        }
+			<!-- ITEM 2 -->
+			<div class="store-item">
+				<div class="item-name">Gakusei</div>
+				<img class="item-image" src="img/logo.png" alt="Gakusei">
+				<div class="item-price">Rp. 15.000</div>
+				<div class="item-buttons">
+					<button class="btn-info" onclick="openModal()">i</button>
+					<a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
+				</div>
+			</div>
 
-        /* --- Grid 3 Kolom --- */
-        .container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            max-width: 900px;
-            width: 100%;
-            margin: 0 auto;
-        }
+			<!-- ITEM 3 -->
+			<div class="store-item">
+				<div class="item-name">Gakusei</div>
+				<img class="item-image" src="img/logo.png" alt="Gakusei">
+				<div class="item-price">Rp. 15.000</div>
+				<div class="item-buttons">
+					<button class="btn-info" onclick="openModal()">i</button>
+					<a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
+				</div>
+			</div>
 
-        /* --- Kotak Produk Glassmorphism Hitam --- */
-        .item {
-            background: rgba(20, 20, 20, 0.65);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 16px;
-            padding: 20px 15px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
-        }
+			<!-- ITEM 4 -->
+			<div class="store-item">
+				<div class="item-name">Gakusei</div>
+				<img class="item-image" src="img/logo.png" alt="Gakusei">
+				<div class="item-price">Rp. 15.000</div>
+				<div class="item-buttons">
+					<button class="btn-info" onclick="openModal()">i</button>
+					<a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
+				</div>
+			</div>
 
-        /* Efek Zoom saat Mouse Hover */
-        .item:hover {
-            transform: scale(1.06);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
-            border-color: rgba(255, 255, 255, 0.25);
-        }
+			<!-- ITEM 5 -->
+			<div class="store-item">
+				<div class="item-name">Gakusei</div>
+				<img class="item-image" src="img/logo.png" alt="Gakusei">
+				<div class="item-price">Rp. 15.000</div>
+				<div class="item-buttons">
+					<button class="btn-info" onclick="openModal()">i</button>
+					<a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
+				</div>
+			</div>
 
-        .item-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .item-image {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            margin-bottom: 12px;
-        }
-
-        .item-price {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        /* --- Tombol "i" & "Beli" --- */
-        .item-buttons {
-            display: flex;
-            gap: 10px;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .btn-info {
-            background-color: #ffffff;
-            color: #000;
-            border: none;
-            width: 38px;
-            height: 38px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .btn-beli {
-            background-color: #ffffff;
-            color: #000;
-            border: none;
-            padding: 0 20px;
-            height: 38px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 0.95rem;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.2s;
-        }
-
-        .btn-info:hover, .btn-beli:hover {
-            background-color: #e0e0e0;
-        }
-
-        /* =========================================
-           --- POP-UP (MODAL GLASSMERAH TRANSPARAN) ---
-           ========================================= */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .modal-content {
-            /* Glassmorphism Merah Transparan */
-            background: rgba(255, 115, 115, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 16px;
-            padding: 25px 30px;
-            width: 90%;
-            max-width: 420px;
-            color: #ffffff;
-            position: relative;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            transform: scale(0.85);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .modal-overlay.active .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .modal-header h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .close-btn {
-            position: absolute;
-            right: 0;
-            top: -5px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .benefit-list {
-            list-style: none;
-            font-size: 0.95rem;
-            line-height: 1.7;
-            font-weight: 600;
-        }
-
-        .benefit-list li {
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .benefit-list li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        /* Responsive Mobile */
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 480px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <h1 class="main-title">Katagory</h1>
-
-    <div class="container">
-        <!-- ITEM 1 -->
-        <div class="item">
-            <div class="item-name">Gakusei</div>
-            <!-- Menggunakan Icon SVG Minecraft/Sakura sederhana sebagai pengganti gambar yang error -->
-            <svg class="item-image" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="100" height="100" rx="15" fill="#2a1b2a"/>
-                <circle cx="50" cy="40" r="25" fill="#e91e63" opacity="0.8"/>
-                <path d="M30 75 L50 45 L70 75 Z" fill="#ff4081"/>
-            </svg>
-            <div class="item-price">Rp. 15.000</div>
-            <div class="item-buttons">
-                <button class="btn-info" onclick="openModal()">i</button>
-                <a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
-            </div>
-        </div>
-
-        <!-- ITEM 2 -->
-        <div class="item">
-            <div class="item-name">Gakusei</div>
-            <svg class="item-image" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="100" height="100" rx="15" fill="#2a1b2a"/>
-                <circle cx="50" cy="40" r="25" fill="#e91e63" opacity="0.8"/>
-                <path d="M30 75 L50 45 L70 75 Z" fill="#ff4081"/>
-            </svg>
-            <div class="item-price">Rp. 15.000</div>
-            <div class="item-buttons">
-                <button class="btn-info" onclick="openModal()">i</button>
-                <a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
-            </div>
-        </div>
-
-        <!-- ITEM 3 -->
-        <div class="item">
-            <div class="item-name">Gakusei</div>
-            <svg class="item-image" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="100" height="100" rx="15" fill="#2a1b2a"/>
-                <circle cx="50" cy="40" r="25" fill="#e91e63" opacity="0.8"/>
-                <path d="M30 75 L50 45 L70 75 Z" fill="#ff4081"/>
-            </svg>
-            <div class="item-price">Rp. 15.000</div>
-            <div class="item-buttons">
-                <button class="btn-info" onclick="openModal()">i</button>
-                <a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
-            </div>
-        </div>
-
-        <!-- ITEM 4 -->
-        <div class="item">
-            <div class="item-name">Gakusei</div>
-            <svg class="item-image" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="100" height="100" rx="15" fill="#2a1b2a"/>
-                <circle cx="50" cy="40" r="25" fill="#e91e63" opacity="0.8"/>
-                <path d="M30 75 L50 45 L70 75 Z" fill="#ff4081"/>
-            </svg>
-            <div class="item-price">Rp. 15.000</div>
-            <div class="item-buttons">
-                <button class="btn-info" onclick="openModal()">i</button>
-                <a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
-            </div>
-        </div>
-
-        <!-- ITEM 5 -->
-        <div class="item">
-            <div class="item-name">Gakusei</div>
-            <svg class="item-image" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="100" height="100" rx="15" fill="#2a1b2a"/>
-                <circle cx="50" cy="40" r="25" fill="#e91e63" opacity="0.8"/>
-                <path d="M30 75 L50 45 L70 75 Z" fill="#ff4081"/>
-            </svg>
-            <div class="item-price">Rp. 15.000</div>
-            <div class="item-buttons">
-                <button class="btn-info" onclick="openModal()">i</button>
-                <a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
-            </div>
-        </div>
-
-        <!-- ITEM 6 -->
-        <div class="item">
-            <div class="item-name">Gakusei</div>
-            <svg class="item-image" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="100" height="100" rx="15" fill="#2a1b2a"/>
-                <circle cx="50" cy="40" r="25" fill="#e91e63" opacity="0.8"/>
-                <path d="M30 75 L50 45 L70 75 Z" fill="#ff4081"/>
-            </svg>
-            <div class="item-price">Rp. 15.000</div>
-            <div class="item-buttons">
-                <button class="btn-info" onclick="openModal()">i</button>
-                <a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- POP-UP MODAL MERAH -->
-    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Detail</h2>
-                <button class="close-btn" onclick="closeModal()">X</button>
-            </div>
-            <ul class="benefit-list">
-                <li>Mendapatkan Uang In-Game</li>
-                <li>Spesial Prefix</li>
-                <li>Kit Premium</li>
-                <li>Akses Role Premium Di Discord</li>
-                <li>Akses Role Premium Di Discord</li>
-                <li>Akses Role Premium Di Discord</li>
-                <li>Akses Role Premium Di Discord</li>
-                <li>Akses Role Premium Di Discord</li>
-                <li>Akses Role Premium Di Discord</li>
-                <li>Akses Role Premium Di Discord</li>
-                <li>Akses Role Premium Di Discord</li>
-                <li>Dan Benefit lainnya</li>
-            </ul>
-        </div>
-    </div>
-
-    <script>
-        function openModal() {
-            document.getElementById('modalOverlay').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('modalOverlay').classList.remove('active');
-        }
-
-        function closeModalOnBg(event) {
-            if (event.target.id === 'modalOverlay') {
-                closeModal();
-            }
-        }
-    </script>
-</div>
+			<!-- ITEM 6 -->
+			<div class="store-item">
+				<div class="item-name">Gakusei</div>
+				<img class="item-image" src="img/logo.png" alt="Gakusei">
+				<div class="item-price">Rp. 15.000</div>
+				<div class="item-buttons">
+					<button class="btn-info" onclick="openModal()">i</button>
+					<a href="https://google.com" target="_blank" class="btn-beli">Beli</a>
+				</div>
+			</div>
 		</div>
+	</div>
+
+	<!-- POP-UP MODAL GLASS MERAH TRANSPARAN -->
+	<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2>Detail</h2>
+				<button class="close-btn" onclick="closeModal()">X</button>
+			</div>
+			<ul class="benefit-list">
+				<li>Mendapatkan Uang In-Game</li>
+				<li>Spesial Prefix</li>
+				<li>Kit Premium</li>
+				<li>Akses Role Premium Di Discord</li>
+				<li>Akses Role Premium Di Discord</li>
+				<li>Akses Role Premium Di Discord</li>
+				<li>Akses Role Premium Di Discord</li>
+				<li>Akses Role Premium Di Discord</li>
+				<li>Akses Role Premium Di Discord</li>
+				<li>Akses Role Premium Di Discord</li>
+				<li>Akses Role Premium Di Discord</li>
+				<li>Dan Benefit lainnya</li>
+			</ul>
+		</div>
+	</div>
+
+	<script>
+		function openModal() {
+			document.getElementById('modalOverlay').classList.add('active');
+		}
+
+		function closeModal() {
+			document.getElementById('modalOverlay').classList.remove('active');
+		}
+
+		function closeModalOnBg(event) {
+			if (event.target.id === 'modalOverlay') {
+				closeModal();
+			}
+		}
+	</script>
+
 	<script src="js/firefly.js" type="text/javascript"></script>
 	<script src="js/main.js" type="text/javascript"></script>
 </body>
