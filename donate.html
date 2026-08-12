@@ -33,413 +33,363 @@
 		</div>
 
 	<div id="doaing-products">
-  <style>
-    /* SEMUA STYLE DIBATASI KE #doaing-products
-       agar tidak merusak background/CSS website utama. */
+<style>
+        /* --- Reset & Font Dasar --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    #doaing-products {
-      width: 100%;
-      margin: 30px auto;
-      padding: 35px 50px 45px;
-      background: transparent !important;
-      font-family: Arial, Helvetica, sans-serif;
-      box-sizing: border-box;
-    }
+        body {
+            background-color: #000; /* Latar belakang hitam pekat */
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
 
-    #doaing-products *,
-    #doaing-products *::before,
-    #doaing-products *::after {
-      box-sizing: border-box;
-    }
+        /* --- Gaya Judul Utama --- */
+        h1.main-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
 
-    #doaing-products .dp-title {
-      margin: 0 0 28px !important;
-      padding: 0 !important;
-      text-align: center;
-      color: #fff !important;
-      background: transparent !important;
-      font-size: 42px !important;
-      line-height: 1.05 !important;
-      font-weight: 700 !important;
-    }
+        /* --- Grid Container Produk --- */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 Kolom */
+            gap: 30px;
+            max-width: 1000px;
+            width: 100%;
+        }
 
-    #doaing-products .dp-grid {
-      width: min(650px, 100%);
-      margin: 0 auto;
-      padding: 0 10px 30px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      column-gap: 35px;
-      row-gap: 56px;
-      background: transparent !important;
-    }
+        /* --- Gaya Kotakan Produk (Glassmorphism Hitam) --- */
+        .item {
+            background: rgba(255, 255, 255, 0.05); /* Putih sangat transparan */
+            backdrop-filter: blur(10px); /* Efek blur kaca */
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            /* Efek Transisi untuk Zoom */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    #doaing-products .dp-card {
-      min-width: 0;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.72) !important;
-	  border: 1px solid rgba(255, 255, 255, 0.10);
-      border-radius: 12px;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
-      color: #fff !important;
-    }
+        /* --- Efek Zoom saat Mouse Diatas --- */
+        .item:hover {
+            transform: scale(1.05); /* Zoom in sedikit */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.08); /* Sedikit lebih terang saat hover */
+        }
 
-    #doaing-products .dp-name {
-      margin: 0 0 3px !important;
-      padding: 0 !important;
-      color: #fff !important;
-      background: transparent !important;
-      font-size: 27px !important;
-      line-height: 1.1 !important;
-      font-weight: 700 !important;
-      text-align: center;
-    }
+        /* --- Elemen di dalam Item --- */
+        .item-name {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
 
-    #doaing-products .dp-image {
-      display: block;
-      width: 145px;
-      height: 137px;
-      max-width: 100%;
-      margin: 0 auto 3px;
-      padding: 0;
-      object-fit: contain;
-      object-position: center;
-      background: transparent !important;
-      border: 0 !important;
-    }
+        .item-image {
+            width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+            display: block;
+        }
 
-    #doaing-products .dp-price {
-      margin: 0 0 6px;
-      padding: 0;
-      color: #fff !important;
-      background: transparent !important;
-      font-size: 27px !important;
-      line-height: 1.05 !important;
-      font-weight: 700 !important;
-      text-align: center;
-    }
+        .item-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
 
-    #doaing-products .dp-buttons {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 9px;
-      margin: 0 !important;
-      padding: 0 !important;
-      background: transparent !important;
-    }
+        /* --- Container Tombol --- */
+        .item-buttons {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+        }
 
-    #doaing-products .dp-btn {
-      height: 43px !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      border: 0 !important;
-      border-radius: 10px !important;
-      background: #fff !important;
-      color: #000 !important;
-      font-family: Arial, Helvetica, sans-serif !important;
-      font-size: 21px !important;
-      line-height: 43px !important;
-      font-weight: 700 !important;
-      text-align: center;
-      cursor: pointer;
-      box-shadow: none !important;
-    }
+        /* --- Gaya Dasar Tombol --- */
+        .btn {
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            font-size: 0.9rem;
+            text-decoration: none; /* Untuk link 'Beli' */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    #doaing-products .dp-info {
-      width: 42px !important;
-    }
+        /* Tombol 'i' */
+        .btn-info {
+            background-color: white;
+            color: black;
+            width: 40px; /* Membuatnya kotak */
+            padding: 10px 0;
+        }
 
-    #doaing-products .dp-buy {
-      width: 91px !important;
-    }
+        .btn-info:hover {
+            background-color: #e0e0e0;
+        }
 
-    #doaing-products .dp-btn:hover {
-      transform: scale(1.04);
-    }
+        /* Tombol 'Beli' */
+        .btn-beli {
+            background-color: white;
+            color: black;
+            flex-grow: 1; /* Mengisi sisa ruang */
+            max-width: 120px;
+        }
 
-    /* Popup */
-    #doaing-products .dp-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 2147483647;
-      display: none;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 18px 15px;
-      background: rgba(0,0,0,.45) !important;
-    }
+        .btn-beli:hover {
+            background-color: #e0e0e0;
+        }
 
-    #doaing-products .dp-modal.dp-open {
-      display: flex;
-    }
+        /* =========================================
+           --- PERBAIKAN STYLING POP-UP (MODAL) ---
+           Sesuai Gambar 2 (Glassmorphism Merah)
+           ========================================= */
+        
+        /* Overlay Latar Belakang (Gelap) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Gelap transparan */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            /* Sembunyikan secara default */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
 
-    #doaing-products .dp-box {
-      position: relative;
-      width: min(673px, 100%);
-      max-height: calc(100vh - 36px);
-      overflow-y: auto;
-      margin: 0 !important;
-      padding: 8px 14px 20px !important;
-      border: 1px solid rgba(255,255,255,.2) !important;
-      border-radius: 12px !important;
-      background: rgba(255,0,0,.28) !important;
-      color: #fff !important;
-      box-shadow: 0 8px 40px rgba(0,0,0,.35) !important;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
+        /* Tampilkan Overlay */
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
 
-    #doaing-products .dp-modal-title {
-      margin: 0 45px 17px !important;
-      padding: 0 !important;
-      color: #fff !important;
-      background: transparent !important;
-      font-size: 52px !important;
-      line-height: 1 !important;
-      font-weight: 700 !important;
-      text-align: center;
-    }
+        /* Kotak Konten Pop-up (Glassmorphism Merah) */
+        .modal-content {
+            /* Warna dasar merah muda/kebapakan sesuai gambar */
+            background: rgba(255, 131, 131, 0.6); 
+            backdrop-filter: blur(15px); /* Efek blur kaca kuat */
+            -webkit-backdrop-filter: blur(15px);
+            
+            color: white; /* Teks putih */
+            width: 90%;
+            max-width: 500px; /* Lebar maksimal */
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            
+            /* Animasi muncul */
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
 
-    #doaing-products .dp-close {
-      position: absolute;
-      top: 6px;
-      right: 14px;
-      width: auto !important;
-      height: auto !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      border: 0 !important;
-      background: transparent !important;
-      color: #fff !important;
-      font-size: 38px !important;
-      line-height: 1 !important;
-      font-weight: 700 !important;
-      cursor: pointer;
-    }
+        /* Animasi konten saat terbuka */
+        .modal-overlay.open .modal-content {
+            transform: scale(1);
+        }
 
-    #doaing-products .dp-benefits {
-      margin: 0 !important;
-      padding: 0 0 0 27px !important;
-      color: #fff !important;
-      background: transparent !important;
-      font-size: 31px !important;
-      line-height: 1.34 !important;
-      font-weight: 700 !important;
-      text-align: left;
-    }
+        /* Header Pop-up (Detail & X) */
+        .modal-header {
+            display: flex;
+            justify-content: center; /* Judul di tengah */
+            align-items: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
 
-    #doaing-products .dp-benefits li {
-      margin: 0 !important;
-      padding: 0 !important;
-      color: #fff !important;
-      background: transparent !important;
-    }
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
 
-    @media (max-width: 600px) {
-      #doaing-products .dp-title {
-        font-size: 34px !important;
-      }
+        /* Tombol Tutup (X) di pojok kanan atas */
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            top: 0;
+            opacity: 0.8;
+            transition: opacity 0.2s ease;
+        }
 
-      #doaing-products .dp-grid {
-        column-gap: 10px;
-        row-gap: 45px;
-      }
+        .close-modal:hover {
+            opacity: 1;
+        }
 
-      #doaing-products .dp-name,
-      #doaing-products .dp-price {
-        font-size: 23px !important;
-      }
+        /* List Benefit */
+        .benefit-list {
+            list-style: none; /* Hapus bullet default */
+            font-size: 1rem;
+            line-height: 1.6;
+        }
 
-      #doaing-products .dp-image {
-        width: 135px;
-        height: 125px;
-      }
+        /* Kustomisasi Bullet Point Putih */
+        .benefit-list li {
+            position: relative;
+            padding-left: 25px; /* Ruang untuk bullet */
+            margin-bottom: 8px;
+        }
 
-      #doaing-products .dp-modal-title {
-        font-size: 42px !important;
-      }
+        .benefit-list li::before {
+            content: "•"; /* Karakter bullet */
+            color: white; /* Warna bullet putih */
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
 
-      #doaing-products .dp-benefits {
-        font-size: 22px !important;
-      }
-    }
+        /* --- Media Query untuk HP --- */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr); /* 2 Kolom di tablet */
+            }
+        }
 
-    @media (max-width: 390px) {
-      #doaing-products .dp-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-  </style>
+        @media (max-width: 480px) {
+            .container {
+                grid-template-columns: 1fr; /* 1 Kolom di HP */
+            }
+            h1.main-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
 
-  <h1 class="dp-title">Katagory</h1>
+    <h1 class="main-title">Katagory</h1>
 
-  <div class="dp-grid">
-
-    <div class="dp-card">
-      <div class="dp-name">Gakusei</div>
-      <img class="dp-image" src="https://files.catbox.moe/ce9208.png" alt="Gakusei">
-      <div class="dp-price">Rp. 15.000</div>
-      <div class="dp-buttons">
-        <button class="dp-btn dp-info" type="button" onclick="dpShow(0)">i</button>
-        <button class="dp-btn dp-buy" type="button" onclick="dpBuy(0)">Beli</button>
-      </div>
+    <!-- Container Grid Produk -->
+    <div class="container" id="product-container">
+        <!-- Item produk akan dimasukkan di sini oleh JavaScript -->
     </div>
 
-    <div class="dp-card">
-      <div class="dp-name">Gakusei</div>
-      <img class="dp-image" src="GANTI_DENGAN_LINK_GAMBAR_2" alt="Gakusei">
-      <div class="dp-price">Rp. 15.000</div>
-      <div class="dp-buttons">
-        <button class="dp-btn dp-info" type="button" onclick="dpShow(1)">i</button>
-        <button class="dp-btn dp-buy" type="button" onclick="dpBuy(1)">Beli</button>
-      </div>
+    <!-- =========================================
+       --- STRUKTUR HTML POP-UP (MODAL) ---
+       ========================================= -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Detail</h2>
+                <button class="close-modal" id="closeModal">X</button>
+            </div>
+            <ul class="benefit-list">
+                <li>Mendapatkan Uang In-Game</li>
+                <li>Spesial Prefix</li>
+                <li>Kit Premium</li>
+                <li>Akses Role Premium Di Discord</li>
+                <li>Akses Role Premium Di Discord</li>
+                <li>Akses Role Premium Di Discord</li>
+                <li>Akses Role Premium Di Discord</li>
+                <li>Akses Role Premium Di Discord</li>
+                <li>Akses Role Premium Di Discord</li>
+                <li>Akses Role Premium Di Discord</li>
+                <li>Akses Role Premium Di Discord</li>
+                <li>Dan Benefit lainnya</li>
+            </ul>
+        </div>
     </div>
 
-    <div class="dp-card">
-      <div class="dp-name">Gakusei</div>
-      <img class="dp-image" src="GANTI_DENGAN_LINK_GAMBAR_3" alt="Gakusei">
-      <div class="dp-price">Rp. 15.000</div>
-      <div class="dp-buttons">
-        <button class="dp-btn dp-info" type="button" onclick="dpShow(2)">i</button>
-        <button class="dp-btn dp-buy" type="button" onclick="dpBuy(2)">Beli</button>
-      </div>
-    </div>
+    <script>
+        // --- Data Produk (Agar mudah diubah) ---
+        const products = [
+            { name: "Gakusei", price: "Rp. 15.000", image: "https://i.imgur.com/8Q9N38E.png", buyLink: "#link-beli-1" },
+            { name: "Gakusei", price: "Rp. 15.000", image: "https://i.imgur.com/8Q9N38E.png", buyLink: "#link-beli-2" },
+            { name: "Gakusei", price: "Rp. 15.000", image: "https://i.imgur.com/8Q9N38E.png", buyLink: "#link-beli-3" },
+            { name: "Gakusei", price: "Rp. 15.000", image: "https://i.imgur.com/8Q9N38E.png", buyLink: "#link-beli-4" },
+            { name: "Gakusei", price: "Rp. 15.000", image: "https://i.imgur.com/8Q9N38E.png", buyLink: "#link-beli-5" },
+            { name: "Gakusei", price: "Rp. 15.000", image: "https://i.imgur.com/8Q9N38E.png", buyLink: "#link-beli-6" }
+        ];
 
-    <div class="dp-card">
-      <div class="dp-name">Gakusei</div>
-      <img class="dp-image" src="GANTI_DENGAN_LINK_GAMBAR_4" alt="Gakusei">
-      <div class="dp-price">Rp. 15.000</div>
-      <div class="dp-buttons">
-        <button class="dp-btn dp-info" type="button" onclick="dpShow(3)">i</button>
-        <button class="dp-btn dp-buy" type="button" onclick="dpBuy(3)">Beli</button>
-      </div>
-    </div>
+        // --- Mendistribusikan Produk ke HTML ---
+        const container = document.getElementById('product-container');
 
-    <div class="dp-card">
-      <div class="dp-name">Gakusei</div>
-      <img class="dp-image" src="GANTI_DENGAN_LINK_GAMBAR_5" alt="Gakusei">
-      <div class="dp-price">Rp. 15.000</div>
-      <div class="dp-buttons">
-        <button class="dp-btn dp-info" type="button" onclick="dpShow(4)">i</button>
-        <button class="dp-btn dp-buy" type="button" onclick="dpBuy(4)">Beli</button>
-      </div>
-    </div>
+        products.forEach(product => {
+            const productHtml = `
+                <div class="item">
+                    <div class="item-name">${product.name}</div>
+                    <img src="${product.image}" alt="${product.name}" class="item-image">
+                    <div class="item-price">${product.price}</div>
+                    <div class="item-buttons">
+                        <button class="btn btn-info open-info-btn">i</button>
+                        <a href="${product.buyLink}" target="_blank" class="btn btn-beli">Beli</a>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += productHtml;
+        });
 
-    <div class="dp-card">
-      <div class="dp-name">Gakusei</div>
-      <img class="dp-image" src="GANTI_DENGAN_LINK_GAMBAR_6" alt="Gakusei">
-      <div class="dp-price">Rp. 15.000</div>
-      <div class="dp-buttons">
-        <button class="dp-btn dp-info" type="button" onclick="dpShow(5)">i</button>
-        <button class="dp-btn dp-buy" type="button" onclick="dpBuy(5)">Beli</button>
-      </div>
-    </div>
+        // --- Logika Pop-up (Modal) ---
+        const modalOverlay = document.getElementById('modalOverlay');
+        const closeModalBtn = document.getElementById('closeModal');
+        const openInfoButtons = document.querySelectorAll('.open-info-btn');
 
-  </div>
+        // Fungsi Membuka Modal
+        function openModal() {
+            modalOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden'; /* Mencegah scroll latar belakang */
+        }
 
-  <div id="dpModal" class="dp-modal" onclick="dpOutside(event)">
-    <div class="dp-box">
-      <button class="dp-close" type="button" onclick="dpClose()">×</button>
-      <div class="dp-modal-title">Detail</div>
-      <ul id="dpBenefits" class="dp-benefits"></ul>
-    </div>
-  </div>
+        // Fungsi Menutup Modal
+        function closeModal() {
+            modalOverlay.classList.remove('open');
+            document.body.style.overflow = ''; /* Mengembalikan scroll */
+        }
 
-  <script>
-    const dpProducts = [
-      {
-        buy: "https://doaingshop.my.id/pay?amount=15000",
-        benefits: [
-          "Mendapatkan Uang In-Game",
-          "Spesial Prefix",
-          "Kit Premium",
-          "Akses Role Premium Di Discord",
-          "Dan Benefit lainnya"
-        ]
-      },
-      {
-        buy: "https://doaingshop.my.id/pay?amount=30000",
-        benefits: [
-          "Mendapatkan Uang In-Game",
-          "Spesial Prefix",
-          "Kit Premium",
-          "Akses Role Premium Di Discord",
-          "Dan Benefit lainnya"
-        ]
-      },
-      {
-        buy: "https://doaingshop.my.id/pay?amount=45000",
-        benefits: [
-          "Mendapatkan Uang In-Game",
-          "Spesial Prefix",
-          "Kit Premium",
-          "Akses Role Premium Di Discord",
-          "Dan Benefit lainnya"
-        ]
-      },
-      {
-        buy: "https://doaingshop.my.id/pay?amount=60000",
-        benefits: [
-          "Mendapatkan Uang In-Game",
-          "Spesial Prefix",
-          "Kit Premium",
-          "Akses Role Premium Di Discord",
-          "Dan Benefit lainnya"
-        ]
-      },
-      {
-        buy: "GANTI_DENGAN_LINK_BELI_5",
-        benefits: [
-          "Mendapatkan Uang In-Game",
-          "Spesial Prefix",
-          "Kit Premium",
-          "Akses Role Premium Di Discord",
-          "Dan Benefit lainnya"
-        ]
-      },
-      {
-        buy: "GANTI_DENGAN_LINK_BELI_6",
-        benefits: [
-          "Mendapatkan Uang In-Game",
-          "Spesial Prefix",
-          "Kit Premium",
-          "Akses Role Premium Di Discord",
-          "Dan Benefit lainnya"
-        ]
-      }
-    ];
+        // Event Listener untuk tombol 'i'
+        openInfoButtons.forEach(button => {
+            button.addEventListener('click', openModal);
+        });
 
-    function dpShow(index) {
-      const list = document.getElementById("dpBenefits");
-      list.innerHTML = "";
+        // Event Listener untuk tombol Tutup (X)
+        closeModalBtn.addEventListener('click', closeModal);
 
-      dpProducts[index].benefits.forEach(function(text) {
-        const li = document.createElement("li");
-        li.textContent = text;
-        list.appendChild(li);
-      });
+        // Event Listener untuk menutup jika klik di luar kotak putih (di overlay)
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
 
-      document.getElementById("dpModal").classList.add("dp-open");
-    }
-
-    function dpClose() {
-      document.getElementById("dpModal").classList.remove("dp-open");
-    }
-
-    function dpOutside(event) {
-      if (event.target.id === "dpModal") dpClose();
-    }
-
-    function dpBuy(index) {
-      window.location.href = dpProducts[index].buy;
-    }
-
-    document.addEventListener("keydown", function(event) {
-      if (event.key === "Escape") dpClose();
-    });
-  </script>
+        // Menutup dengan tombol Esc
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('open')) {
+                closeModal();
+            }
+        });
+    </script>
 </div>
 		</div>
 	<script src="js/firefly.js" type="text/javascript"></script>
