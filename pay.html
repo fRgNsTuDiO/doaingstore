@@ -365,11 +365,11 @@
             <li>Transfer <b>sesuai nominal yang tertera di halaman</b>.</li>
             <li>Pastikan nomor tujuan atau QRIS sudah benar.</li>
             <li>Simpan bukti pembayaran.</li>
-            <li>Setelah pembayaran, klik tombol <b>Cek status</b>.</li>
+            <li>Setelah pembayaran, klik tombol <b>Konfirmasi Ke Admin</b>.</li>
           </ol>
         </details>
 
-        <button class="status" onclick="checkStatus()">Cek status</button>
+        <button class="status" onclick="checkStatus()">Konfirmasi Ke Admin</button>
       </div>
     </div>
 
@@ -398,7 +398,7 @@
   // GANTI DENGAN LINK GAMBAR QRIS ANDA NANTI.
   // Contoh:
   // const QRIS_URL = "https://domainanda.com/qris.png";
-  const QRIS_URL = "";
+  const QRIS_URL = "https://files.catbox.moe/cjyw52.png";
 
   // Waktu pembayaran: 3 jam = 10.800 detik
   const PAYMENT_DURATION = 3 * 60 * 60;
@@ -507,7 +507,7 @@
   }
 
   function checkStatus() {
-    showToast("Status pembayaran sedang diperiksa...");
+    showToast("https://wa.me/62882008612013?text=*KONFIRMASI%20PEMBAYARAN*%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0A*Nickname%3A*%20(nickname_kamu)%0A*Platfrom%3A*%20(Java%2FBedrock)%0A*Nominal%3A*%20Rp.%20(Nominal)%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0ATransaksi%20akan%20dilakukan%20paling%20lambat%20*3%20Jam%20kerja*%20tergantung%20Jam%20Sibuk%20Admin%2C%20Harap%20bisa%20bersabar%20dan%20kami%20ucapkan%20terimakasih");
     // Jika nanti sudah mempunyai API pengecekan otomatis,
     // bagian ini bisa dihubungkan ke API Anda.
   }
