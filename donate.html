@@ -7,8 +7,8 @@
 	<!-- Info meta tags, important for social media + SEO -->
 	<title>Doaing Mc - Donate & Store</title>
 	<meta name="description" content="Doaing Mc is a new and awesome Minecraft server. You can join with the IP 'play.doaingmc.xyz'.">
-	<meta property="og:title" content="MyServer - Official Website">
-	<meta property="og:site_name" content="MyServer">
+	<meta property="og:title" content="Doaing Mc - Official Website">
+	<meta property="og:site_name" content="DoaingMc">
 	<meta property="og:description" content="Doaing Mc is a new and awesome Minecraft server. You can join with the IP 'play.doaingmc.xyz'.">
 	<meta property="og:image" content="https://bybilly.uk/portal/img/minecraft.jpg">
 	<meta property="og:url" content="https://bybilly.uk/">
@@ -22,9 +22,8 @@
 	<link rel="stylesheet" href="css/stylesheet.css">
 
 	<style>
-		/* --- CSS KHUSUS STORE (MENCEGAH BENTROK DENGAN TEMPLATE BILLY) --- */
+		/* --- CSS KHUSUS STORE --- */
 		
-		/* Judul Katagory */
 		.store-title {
 			font-size: 2.5rem;
 			font-weight: 700;
@@ -34,7 +33,6 @@
 			text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 		}
 
-		/* Grid 3 Kolom Khusus Toko */
 		.store-grid {
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
@@ -44,7 +42,6 @@
 			margin: 0 auto 50px auto;
 		}
 
-		/* Kotak Produk Glassmorphism Hitam */
 		.store-item {
 			background: rgba(0, 0, 0, 0.55);
 			backdrop-filter: blur(12px);
@@ -60,7 +57,6 @@
 			transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
 		}
 
-		/* Efek Zoom saat Mouse Hover */
 		.store-item:hover {
 			transform: scale(1.05);
 			box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
@@ -89,7 +85,6 @@
 			margin-bottom: 20px;
 		}
 
-		/* Tombol i & Beli */
 		.item-buttons {
 			display: flex;
 			gap: 12px;
@@ -135,9 +130,7 @@
 			background-color: #e0e0e0 !important;
 		}
 
-		/* =========================================
-		   --- POP-UP (MODAL GLASSMERAH TRANSPARAN) ---
-		   ========================================= */
+		/* POP-UP MODAL */
 		.modal-overlay {
 			position: fixed;
 			top: 0;
@@ -160,7 +153,7 @@
 		}
 
 		.modal-content {
-			background: rgba(255, 115, 115, 0.85); /* Glass Red Transparan */
+			background: rgba(255, 115, 115, 0.85);
 			backdrop-filter: blur(16px);
 			-webkit-backdrop-filter: blur(16px);
 			border: 1px solid rgba(255, 255, 255, 0.4);
@@ -230,42 +223,32 @@
 			font-size: 1.2rem;
 		}
 
-		/* Responsive Mobile */
 		@media (max-width: 768px) {
-			.store-grid {
-				grid-template-columns: repeat(2, 1fr);
-			}
+			.store-grid { grid-template-columns: repeat(2, 1fr); }
 		}
 		@media (max-width: 480px) {
-			.store-grid {
-				grid-template-columns: 1fr;
-			}
+			.store-grid { grid-template-columns: 1fr; }
 		}
 	</style>
 </head>
 <body>
-	<!-- The following line is used for the background particles -->
 	<div id="tsparticles"></div>
 
 	<div class="container">
-		<!-- LOGO DORAING MC PALING ATAS -->
 		<div class="logo">
 			<img src="img/logo.png" alt="Doaing logo">
 		</div>
 		
-		<!-- JUDUL KATAGORY -->
 		<h1 class="store-title">Rank In-Game</h1>
 
-		<!-- GRID KOTAKAN PRODUK DIBAWAH LOGO -->
 		<div class="store-grid">
 			<!-- ITEM 1 -->
 			<div class="store-item">
 				<div class="item-name">Gakusei</div>
-				<!-- Ganti 'img/logo.png' dibawah dengan lokasi gambar item Anda jika ada -->
 				<img class="item-image" src="img/logo.png" alt="Gakusei">
 				<div class="item-price">Rp. 15.000</div>
 				<div class="item-buttons">
-					<button class="btn-info" onclick="openModal()">i</button>
+					<button class="btn-info" onclick="openModal('gakusei')">i</button>
 					<a href="https://doaingshop.my.id/pay?amount=5000" target="_blank" class="btn-beli">Beli</a>
 				</div>
 			</div>
@@ -273,10 +256,10 @@
 			<!-- ITEM 2 -->
 			<div class="store-item">
 				<div class="item-name">Roudousha</div>
-				<img class="item-image" src="img/logo.png" alt="Gakusei">
+				<img class="item-image" src="img/logo.png" alt="Roudousha">
 				<div class="item-price">Rp. 30.000</div>
 				<div class="item-buttons">
-					<button class="btn-info" onclick="openModal()">i</button>
+					<button class="btn-info" onclick="openModal('roudousha')">i</button>
 					<a href="https://doaingshop.my.id/pay?amount=15000" target="_blank" class="btn-beli">Beli</a>
 				</div>
 			</div>
@@ -284,10 +267,10 @@
 			<!-- ITEM 3 -->
 			<div class="store-item">
 				<div class="item-name">Kaitakusha</div>
-				<img class="item-image" src="img/logo.png" alt="Gakusei">
+				<img class="item-image" src="img/logo.png" alt="Kaitakusha">
 				<div class="item-price">Rp. 45.000</div>
 				<div class="item-buttons">
-					<button class="btn-info" onclick="openModal()">i</button>
+					<button class="btn-info" onclick="openModal('kaitakusha')">i</button>
 					<a href="https://doaingshop.my.id/pay?amount=30000" target="_blank" class="btn-beli">Beli</a>
 				</div>
 			</div>
@@ -295,32 +278,32 @@
 			<!-- ITEM 4 -->
 			<div class="store-item">
 				<div class="item-name">Jitsugyouka</div>
-				<img class="item-image" src="img/logo.png" alt="Gakusei">
+				<img class="item-image" src="img/logo.png" alt="Jitsugyouka">
 				<div class="item-price">Rp. 60.000</div>
 				<div class="item-buttons">
-					<button class="btn-info" onclick="openModal()">i</button>
+					<button class="btn-info" onclick="openModal('jitsugyouka')">i</button>
 					<a href="https://doaingshop.my.id/pay?amount=45000" target="_blank" class="btn-beli">Beli</a>
 				</div>
 			</div>
 
 			<!-- ITEM 5 -->
 			<div class="store-item">
-				<div class="item-name">torishimariyaku</div>
-				<img class="item-image" src="img/logo.png" alt="Gakusei">
+				<div class="item-name">Torishimariyaku</div>
+				<img class="item-image" src="img/logo.png" alt="Torishimariyaku">
 				<div class="item-price">Rp. 75.000</div>
 				<div class="item-buttons">
-					<button class="btn-info" onclick="openModal()">i</button>
+					<button class="btn-info" onclick="openModal('torishimariyaku')">i</button>
 					<a href="https://doaingshop.my.id/pay?amount=60000" target="_blank" class="btn-beli">Beli</a>
 				</div>
 			</div>
 
 			<!-- ITEM 6 -->
 			<div class="store-item">
-				<div class="item-name">Costum Rank</div>
-				<img class="item-image" src="img/logo.png" alt="Gakusei">
+				<div class="item-name">Custom Rank</div>
+				<img class="item-image" src="img/logo.png" alt="Custom Rank">
 				<div class="item-price">Rp. 150.000</div>
 				<div class="item-buttons">
-					<button class="btn-info" onclick="openModal()">i</button>
+					<button class="btn-info" onclick="openModal('custom')">i</button>
 					<a href="https://doaingshop.my.id/pay?amount=150000" target="_blank" class="btn-beli">Beli</a>
 				</div>
 			</div>
@@ -331,28 +314,100 @@
 	<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h2>Detail</h2>
+				<h2 id="modalTitle">Detail</h2>
 				<button class="close-btn" onclick="closeModal()">X</button>
 			</div>
-			<ul class="benefit-list">
-				<li>Mendapatkan Uang In-Game</li>
-				<li>Spesial Prefix</li>
-				<li>Kit Premium</li>
-				<li>Akses Role Premium Di Discord</li>
-				<li>Akses Role Premium Di Discord</li>
-				<li>Akses Role Premium Di Discord</li>
-				<li>Akses Role Premium Di Discord</li>
-				<li>Akses Role Premium Di Discord</li>
-				<li>Akses Role Premium Di Discord</li>
-				<li>Akses Role Premium Di Discord</li>
-				<li>Akses Role Premium Di Discord</li>
-				<li>Dan Benefit lainnya</li>
+			<ul class="benefit-list" id="benefitList">
+				<!-- Benefit akan diisi oleh JavaScript secara otomatis -->
 			</ul>
 		</div>
 	</div>
 
 	<script>
-		function openModal() {
+		// DATA BENEFIT MASING-MASING RANK (Ubah daftar benefit di sini)
+		const rankData = {
+			gakusei: {
+				title: "Detail Gakusei",
+				benefits: [
+					"Prefix [Gakusei] Khusus",
+					"Uang In-Game $10,000",
+					"Kit Starter Gakusei",
+					"Akses Role Gakusei di Discord"
+				]
+			},
+			roudousha: {
+				title: "Detail Roudousha",
+				benefits: [
+					"Prefix [Roudousha] Khusus",
+					"Uang In-Game $25,000",
+					"Kit Roudousha",
+					"Bisa Set Home (3 Location)",
+					"Akses Role Roudousha di Discord"
+				]
+			},
+			kaitakusha: {
+				title: "Detail Kaitakusha",
+				benefits: [
+					"Prefix [Kaitakusha] Khusus",
+					"Uang In-Game $50,000",
+					"Kit Kaitakusha VIP",
+					"Akses Fly di Hub/Lobby",
+					"Bisa Set Home (5 Location)",
+					"Akses Role Premium di Discord"
+				]
+			},
+			jitsugyouka: {
+				title: "Detail Jitsugyouka",
+				benefits: [
+					"Prefix [Jitsugyouka] Khusus",
+					"Uang In-Game $100,000",
+					"Kit Jitsugyouka Pro",
+					"Akses Fly di Claim Land",
+					"Prioritas Slot Masuk Server",
+					"Akses Role Premium di Discord"
+				]
+			},
+			torishimariyaku: {
+				title: "Detail Torishimariyaku",
+				benefits: [
+					"Prefix [Torishimariyaku] Khusus",
+					"Uang In-Game $250,000",
+					"Kit Torishimariyaku Ultimate",
+					"Akses Command /hat & /workbench",
+					"Bisa Set Home Unlimted",
+					"Akses VIP Channel di Discord"
+				]
+			},
+			custom: {
+				title: "Detail Custom Rank",
+				benefits: [
+					"Request Prefix + Warna Custom Bebas",
+					"Uang In-Game $500,000",
+					"Semua Akses Benefit Rank Sebelumnya",
+					"Akses Tag Khusus di Discord",
+					"Support Langsung dari Owner"
+				]
+			}
+		};
+
+		function openModal(rankKey) {
+			const data = rankData[rankKey];
+			if (!data) return;
+
+			// Ubah Judul Modal
+			document.getElementById('modalTitle').innerText = data.title;
+
+			// Ubah List Benefit
+			const benefitListElement = document.getElementById('benefitList');
+			benefitListElement.innerHTML = ''; // Kosongkan list lama
+
+			data.benefits.forEach(benefit => {
+				const li = document.createElement('li');
+				li.textContent = benefit;
+				benefitListElement.appendChild(li);
+			});
+
+			// Tampilkan Modal
 			document.getElementById('modalOverlay').classList.add('active');
 		}
 
